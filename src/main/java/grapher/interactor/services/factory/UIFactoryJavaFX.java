@@ -1,6 +1,22 @@
 package grapher.interactor.services.factory;
 
-public class UIFactory implements IUIFactory {
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+
+public class UIFactoryJavaFX implements IUIFactory {
+
+    public Button createButton(String title) {
+        Button button = new Button(title);
+        button.setMaxSize(100, 50);
+        return button;
+    }
+
+    public HBox createShapesMenu()
+    {
+        Button button = createButton("TEST");
+        return new HBox(button);
+    }
+
 /*
     @Override
     public IShape createShape(ShapeData shapeData) {

@@ -1,11 +1,9 @@
 package grapher;
 
+import grapher.interactor.services.factory.UIFactoryJavaFX;
+import grapher.interactor.services.ui.IUIService;
+import grapher.interactor.services.ui.UIService;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +20,7 @@ public class App extends Application {
 
         stage.setTitle("Graph Editor");
 
+        /*
         Label label = new Label("Not clicked");
         Button button = new Button("Click");
 
@@ -29,12 +28,22 @@ public class App extends Application {
             label.setText("Clicked!");
         });
 
-        HBox hbox = new HBox(button, label);
+        */
 
-        Scene scene = new Scene(hbox, 200, 100);
+        IUIService uiService = new UIService(new UIFactoryJavaFX());
+        uiService.createShapesMenu();
+
+        //IUIFactory uiFactory = new UIJavaFXFactory();
+        //Button button = uiFactory.createButton("TEST");
+        //uiFactory.createShapesMenu();
+
+        //HBox hbox = uiFactory.createShapesMenu();
+
+        /*
+        Scene scene = new Scene(hbox, 1000, 800);
         stage.setScene(scene);
         stage.show();
-
+*/
     }
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package grapher.interactor.services.factory;
 
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+
 public interface IUIFactory {
-//    IShape createShape(ShapeData shapeData);
-//    Point createPoint(double x, double y);
-//    Line createLine(Point pointStart, Point pointFinish);
-//    Rectangle createRect(Point pointStart, Point pointFinish);
-//    Ellipse createEllipse(Point centerPoint, Point radius);
+    Button createButton(String title);
+    HBox createShapesMenu();
 }
