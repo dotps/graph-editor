@@ -1,14 +1,23 @@
 package grapher.interactor.services.factory;
 
+import grapher.interactor.services.input.IInputService;
 import grapher.interactor.shapes.Shapes;
+import grapher.utils.debug;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UIFactoryJavaFX implements IUIFactory {
 
     private final Stage stage;
+    private Shapes selectedShape = Shapes.Point;
 
     public UIFactoryJavaFX(Stage stage) {
         this.stage = stage;
@@ -24,8 +33,10 @@ public class UIFactoryJavaFX implements IUIFactory {
     {
         HBox hBox = new HBox();
         for (Shapes shape : Shapes.values()) {
-            System.out.println(shape);
             Button button = createButton(shape.name());
+            button.setOnAction((event) -> {
+                selectedShape = shape;
+            });
             hBox.getChildren().add(button);
         }
 
@@ -34,13 +45,69 @@ public class UIFactoryJavaFX implements IUIFactory {
 
     @Override
     public void createUI() {
+
+        StackPane root = new StackPane();
+
+        Canvas canvas = createCanvas();
+        HBox shapesBox = createShapesMenu();
+
+        root.getChildren().add(shapesBox);
+        root.getChildren().add(canvas);
+
+        Scene scene = new Scene(root, 1000, 800);
         stage.setTitle("Graph Editor");
-
-        HBox hbox = createShapesMenu();
-
-        Scene scene = new Scene(hbox, 1000, 800);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private Canvas createCanvas() {
+        Canvas canvas = new Canvas(1000, 700);
+        final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        initDraw(graphicsContext);
+
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
+            event -> {
+                debug.log("MOUSE_PRESSED");
+                graphicsContext.beginPath();
+                graphicsContext.moveTo(event.getX(), event.getY());
+                graphicsContext.stroke();
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+            event -> {
+                debug.log("MOUSE_DRAGGED");
+
+                graphicsContext.lineTo(event.getX(), event.getY());
+                graphicsContext.stroke();
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
+            event -> {
+                debug.log("MOUSE_RELEASED");
+        });
+
+        return canvas;
+    }
+
+    private void initDraw(GraphicsContext gc){
+        double canvasWidth = gc.getCanvas().getWidth();
+        double canvasHeight = gc.getCanvas().getHeight();
+
+        gc.setFill(Color.LIGHTGRAY);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(5);
+
+        gc.fill();
+        gc.strokeRect(
+                0,              //x of the upper left corner
+                0,              //y of the upper left corner
+                canvasWidth,    //width of the rectangle
+                canvasHeight);  //height of the rectangle
+
+        gc.setFill(Color.RED);
+        gc.setStroke(Color.BLUE);
+        gc.setLineWidth(1);
+
     }
 
     public Stage getStage() {
