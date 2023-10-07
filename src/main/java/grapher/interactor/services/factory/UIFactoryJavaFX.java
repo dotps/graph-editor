@@ -1,6 +1,7 @@
 package grapher.interactor.services.factory;
 
 import grapher.interactor.services.input.IInputService;
+import grapher.interactor.shapes.Point;
 import grapher.interactor.shapes.Shapes;
 import grapher.utils.debug;
 import javafx.event.EventHandler;
@@ -17,10 +18,15 @@ import javafx.stage.Stage;
 public class UIFactoryJavaFX implements IUIFactory {
 
     private final Stage stage;
+    private final IInputService inputService;
     private Shapes selectedShape = Shapes.Point;
 
-    public UIFactoryJavaFX(Stage stage) {
+    private Point start;
+    private Point finish;
+
+    public UIFactoryJavaFX(Stage stage, IInputService inputService) {
         this.stage = stage;
+        this.inputService = inputService;
     }
 
     public Button createButton(String title) {
@@ -68,22 +74,27 @@ public class UIFactoryJavaFX implements IUIFactory {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
             event -> {
                 debug.log("MOUSE_PRESSED");
-                graphicsContext.beginPath();
-                graphicsContext.moveTo(event.getX(), event.getY());
-                graphicsContext.stroke();
+                start = new Point(event.getX(), event.getY());
+                //graphicsContext.beginPath();
+                //graphicsContext.moveTo(event.getX(), event.getY());
+                //graphicsContext.stroke();
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
             event -> {
-                debug.log("MOUSE_DRAGGED");
+                //debug.log("MOUSE_DRAGGED");
 
-                graphicsContext.lineTo(event.getX(), event.getY());
-                graphicsContext.stroke();
+                //graphicsContext.lineTo(event.getX(), event.getY());
+                //graphicsContext.stroke();
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
             event -> {
                 debug.log("MOUSE_RELEASED");
+                finish = new Point(event.getX(), event.getY());
+                inputService.input(start, finish, selectedShape);
+                finish = null;
+                start = null;
         });
 
         return canvas;

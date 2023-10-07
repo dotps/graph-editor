@@ -24,7 +24,7 @@ public class App extends Application {
         ISaveLoadService saveLoadService = new SaveLoadService(shapeFactory);
         IInputService inputService = new InputService(drawService, saveLoadService, shapeFactory);
 
-        IUIService uiService = new UIService(new UIFactoryJavaFX(stage));
+        IUIService uiService = new UIService(new UIFactoryJavaFX(stage, inputService));
         uiService.showUI();
 
 

@@ -54,4 +54,10 @@ public class InputService implements IInputService {
 
     }
 
+    public void input(Point start, Point finish, Shapes shapeType) {
+        debug.log(start);
+        debug.log(finish);
+        debug.log(shapeType);
+    }
+
 }
