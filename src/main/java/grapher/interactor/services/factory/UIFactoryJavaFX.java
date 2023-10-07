@@ -1,20 +1,50 @@
 package grapher.interactor.services.factory;
 
+import grapher.interactor.shapes.Shapes;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class UIFactoryJavaFX implements IUIFactory {
 
+    private final Stage stage;
+
+    public UIFactoryJavaFX(Stage stage) {
+        this.stage = stage;
+    }
+
     public Button createButton(String title) {
         Button button = new Button(title);
-        button.setMaxSize(100, 50);
+        button.setMaxSize(100, 30);
         return button;
     }
 
     public HBox createShapesMenu()
     {
-        Button button = createButton("TEST");
-        return new HBox(button);
+        HBox hBox = new HBox();
+        for (Shapes shape : Shapes.values()) {
+            System.out.println(shape);
+            Button button = createButton(shape.name());
+            hBox.getChildren().add(button);
+        }
+
+        return hBox;
+    }
+
+    @Override
+    public void createUI() {
+        stage.setTitle("Graph Editor");
+
+        HBox hbox = createShapesMenu();
+
+        Scene scene = new Scene(hbox, 1000, 800);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
 /*

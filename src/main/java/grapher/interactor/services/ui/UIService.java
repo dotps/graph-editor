@@ -1,6 +1,7 @@
 package grapher.interactor.services.ui;
 
 import grapher.interactor.services.factory.IUIFactory;
+import javafx.scene.Scene;
 
 public class UIService implements IUIService {
 
@@ -11,7 +12,7 @@ public class UIService implements IUIService {
     }
 
     @Override
-    public void createShapesMenu() {
-
+    public void showUI() {
+        uiFactory.createUI();
     }
 }

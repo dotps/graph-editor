@@ -6,4 +6,5 @@ import javafx.scene.layout.HBox;
 public interface IUIFactory {
     Button createButton(String title);
     HBox createShapesMenu();
+    void createUI();
 }
