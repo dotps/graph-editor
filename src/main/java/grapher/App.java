@@ -1,4 +1,4 @@
-package com.example.grapheditor;
+package grapher;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

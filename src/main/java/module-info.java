@@ -4,6 +4,6 @@ module com.example.grapheditor {
 
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.grapheditor to javafx.fxml;
-    exports com.example.grapheditor;
+    opens grapher to javafx.fxml;
+    exports grapher;
 }

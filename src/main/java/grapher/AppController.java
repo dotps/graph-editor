@@ -1,4 +1,4 @@
-package com.example.grapheditor;
+package grapher;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
