@@ -21,6 +21,6 @@ public class Rectangle extends Shape {
     }
 
     private void injectDrawStrategy() {
-        setDrawStrategy(new DrawLine());
+        setDrawStrategy(new DrawLine(true));
     }
 }

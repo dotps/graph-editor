@@ -12,28 +12,44 @@ import javafx.scene.shape.Line;
 
 public class DrawLine implements IDrawStrategy {
 
+    private Boolean isClosed = false;
+
+    public DrawLine(Boolean isClosed) {
+
+        this.isClosed = isClosed;
+    }
+
+    public DrawLine() {
+
+    }
+
     @Override
     public void draw(IShape shape, ICanvas drawArea) {
-        debug.log("DRAW " + shape.getClass().getName());
 
-        PointData startPointData = null;
+        debug.log("DRAW " + shape.getClass().getName());
 
         List<PointData> pointDataList = shape.getAllPointsData();
 
+        if (pointDataList.size() < 2)
+            return;
+
+        PointData prevPointData = null;
+        PointData startPointData = null;
+
         for (PointData pointData : pointDataList) {
-            if (startPointData == null) {
+            if (prevPointData == null) {
+                prevPointData = pointData;
                 startPointData = pointData;
                 continue;
             }
-            Line line = new Line(startPointData.x, startPointData.y, pointData.x, pointData.y);
+            Line line = new Line(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
             drawArea.add(line);
-            startPointData = null;
+            prevPointData = pointData;
         }
 
-        //pointDataList.forEach(pointData -> {
-        //    debug.log("X " + pointData.x + ", Y " + pointData.y);
-        //});
-
-
+        if (isClosed) {
+            Line line = new Line(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
+            drawArea.add(line);
+        }
     }
 }
