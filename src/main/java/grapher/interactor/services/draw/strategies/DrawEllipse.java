@@ -1,6 +1,7 @@
 package grapher.interactor.services.draw.strategies;
 
 import grapher.data.PointData;
+import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
@@ -15,7 +16,7 @@ public class DrawEllipse implements IDrawStrategy {
     static final int COUNT_POINT_FOR_ELLIPSE = 2;
 
     @Override
-    public void draw(IShape shape, Pane drawArea) {
+    public void draw(IShape shape, ICanvas drawArea) {
 
         List<PointData> pointDataList = shape.getAllPointsData();
         if (pointDataList.size() != COUNT_POINT_FOR_ELLIPSE) {

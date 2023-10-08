@@ -1,6 +1,7 @@
 package grapher.interactor.services.input;
 
 import grapher.data.PointData;
+import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.saveload.ISaveLoadService;
@@ -12,7 +13,7 @@ public class InputService implements IInputService {
     private final IDrawService drawService;
     private final ISaveLoadService saveLoadService;
     private final IShapeFactory shapeFactory;
-    private Pane drawArea;
+    private ICanvas drawArea;
 
     public InputService(IDrawService drawService, ISaveLoadService saveLoadService, IShapeFactory shapeFactory) {
         this.drawService = drawService;
@@ -64,7 +65,7 @@ public class InputService implements IInputService {
     }
 
     @Override
-    public void setDrawArea(Pane drawArea) {
+    public void setDrawArea(ICanvas drawArea) {
         this.drawArea = drawArea;
     }
 

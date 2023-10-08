@@ -1,6 +1,8 @@
 package grapher.interactor.services.factory;
 
 import grapher.data.PointData;
+import grapher.interactor.services.draw.ICanvas;
+import grapher.interactor.services.draw.PaneJavaFX;
 import grapher.interactor.services.input.IInputService;
 import grapher.interactor.shapes.IShape;
 import grapher.interactor.shapes.Point;
@@ -60,7 +62,7 @@ public class UIFactoryJavaFX implements IUIFactory {
         StackPane root = new StackPane();
 
         //Canvas canvas = createCanvas();
-        Pane drawArea = createDrawArea();
+        PaneJavaFX drawArea = createDrawArea();
         inputService.setDrawArea(drawArea);
 
         HBox shapesBox = createShapesMenu();
@@ -75,9 +77,9 @@ public class UIFactoryJavaFX implements IUIFactory {
         stage.show();
     }
 
-    private Pane createDrawArea() {
+    private PaneJavaFX createDrawArea() {
 
-        Pane drawArea = new Pane();
+        PaneJavaFX drawArea = new PaneJavaFX();
 
         drawArea.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             debug.log("MOUSE_PRESSED drawArea");

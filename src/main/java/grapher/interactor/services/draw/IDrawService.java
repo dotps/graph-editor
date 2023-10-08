@@ -5,5 +5,5 @@ import grapher.interactor.shapes.IShape;
 import javafx.scene.layout.Pane;
 
 public interface IDrawService extends IService {
-    void draw(IShape shape, Pane drawArea);
+    void draw(IShape shape, ICanvas drawArea);
 }
