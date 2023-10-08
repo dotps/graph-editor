@@ -27,8 +27,6 @@ public class App extends Application {
         IUIService uiService = new UIService(new UIFactoryJavaFX(stage, inputService));
         uiService.showUI();
 
-
-
     }
 
     public static void main(String[] args) {

@@ -21,13 +21,9 @@ import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 
 public class UIFactoryJavaFX implements IUIFactory {
-
     private final Stage stage;
     private final IInputService inputService;
-    private Shapes selectedShape = Shapes.Line;
-
-    private Point start;
-    private Point finish;
+    private Shapes selectedShape = Shapes.Point;
     private PointData startPointData;
     private PointData finishPointData;
 
@@ -42,17 +38,13 @@ public class UIFactoryJavaFX implements IUIFactory {
         return button;
     }
 
-    public HBox createShapesMenu()
-    {
+    public HBox createShapesMenu() {
         HBox hBox = new HBox();
-        for (Shapes shape : Shapes.values()) {
-            Button button = createButton(shape.name());
-            button.setOnAction((event) -> {
-                selectedShape = shape;
-            });
+        for (Shapes shapeType : Shapes.values()) {
+            Button button = createButton(shapeType.name());
+            button.setOnAction((event) -> selectedShape = shapeType);
             hBox.getChildren().add(button);
         }
-
         return hBox;
     }
 
@@ -62,13 +54,10 @@ public class UIFactoryJavaFX implements IUIFactory {
         StackPane root = new StackPane();
         HBox shapesBox = createShapesMenu();
 
-        //Canvas canvas = createCanvas();
         PaneJavaFX drawArea = createDrawArea();
         inputService.setDrawArea(drawArea);
 
-
         root.getChildren().add(shapesBox);
-        //root.getChildren().add(canvas);
         root.getChildren().add(drawArea);
 
         Scene scene = new Scene(root, 1000, 800);
@@ -88,12 +77,8 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         drawArea.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             debug.log("MOUSE_RELEASED drawArea");
-            finish = new Point(event.getX(), event.getY());
             finishPointData = new PointData(event.getX(), event.getY());
             IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
-
-            //Line line = new Line(startPointData.x, startPointData.y, finishPointData.x, finishPointData.y);
-            //drawArea.getChildren().add(line);
 
             startPointData = null;
             finishPointData = null;
@@ -105,119 +90,4 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         return drawArea;
     }
-
-    private Canvas createCanvas() {
-        Canvas canvas = new Canvas(1000, 700);
-        final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        initDraw(graphicsContext);
-
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
-            event -> {
-                debug.log("MOUSE_PRESSED");
-                //start = new Point(event.getX(), event.getY());
-                startPointData = new PointData(event.getX(), event.getY());
-                //graphicsContext.beginPath();
-                //graphicsContext.moveTo(event.getX(), event.getY());
-                //graphicsContext.stroke();
-        });
-
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
-            event -> {
-                //debug.log("MOUSE_DRAGGED");
-
-                //graphicsContext.lineTo(event.getX(), event.getY());
-                //graphicsContext.stroke();
-        });
-
-        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
-            event -> {
-                debug.log("MOUSE_RELEASED");
-                finish = new Point(event.getX(), event.getY());
-                finishPointData = new PointData(event.getX(), event.getY());
-                IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
-
-                //graphicsContext.strokeLine();
-
-
-
-                startPointData = null;
-                finishPointData = null;
-                //finish = null;
-                //start = null;
-        });
-
-        return canvas;
-    }
-
-    private void initDraw(GraphicsContext gc){
-        double canvasWidth = gc.getCanvas().getWidth();
-        double canvasHeight = gc.getCanvas().getHeight();
-
-        gc.setFill(Color.LIGHTGRAY);
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(5);
-
-        gc.fill();
-        gc.strokeRect(
-                0,              //x of the upper left corner
-                0,              //y of the upper left corner
-                canvasWidth,    //width of the rectangle
-                canvasHeight);  //height of the rectangle
-
-        gc.setFill(Color.RED);
-        gc.setStroke(Color.BLUE);
-        gc.setLineWidth(1);
-
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-
-/*
-    @Override
-    public IShape createShape(ShapeData shapeData) {
-
-        switch (shapeData.shapeType) {
-            case Point:
-                Point point = createPoint(0,0);
-                point.setData(shapeData);
-                return point;
-            case Line:
-                Line line = createLine(createPoint(0,0), createPoint(0,0));
-                line.setData(shapeData);
-                return line;
-            case Rectangle:
-                Rectangle rect = createRect(createPoint(0,0), createPoint(0,0));
-                rect.setData(shapeData);
-                return rect;
-            case Ellipse:
-                Point radius = createPoint(0,0);
-                Ellipse ellipse = createEllipse(createPoint(0, 0), radius);
-                ellipse.setData(shapeData);
-                return ellipse;
-            case Star:
-                return null;
-            default:
-                return null;
-        }
-    }
-
-    public Point createPoint(double x, double y) {
-        return new Point(x, y);
-    }
-
-    public Line createLine(Point pointStart, Point pointFinish) {
-        return new Line(pointStart, pointFinish);
-    }
-
-    public Rectangle createRect(Point pointStart, Point pointFinish) {
-        return new Rectangle(pointStart, pointFinish);
-    }
-
-    public Ellipse createEllipse(Point centerPoint, Point radius) {
-        return new Ellipse(centerPoint, radius);
-    }
-
- */
 }

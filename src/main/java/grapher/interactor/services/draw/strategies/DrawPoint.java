@@ -6,12 +6,16 @@ import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 
 public class DrawPoint implements IDrawStrategy {
     @Override
     public void draw(IShape shape, ICanvas drawArea) {
-        PointData pointData = shape.getFirstPointData();
+
         debug.log("DRAW " + shape.getClass().getName());
-        debug.log("X " + pointData.x + ", Y " + pointData.y);
+
+        PointData pointData = shape.getFirstPointData();
+        Line line = new Line(pointData.x, pointData.y, pointData.x, pointData.y);
+        drawArea.add(line);
     }
 }
