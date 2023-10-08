@@ -7,7 +7,7 @@ import javafx.scene.shape.Shape;
 public class PaneJavaFX extends Pane implements ICanvas {
 
     @Override
-    public void addLine(Shape shape) {
+    public void add(Shape shape) {
         this.getChildren().add(shape);
     }
 }

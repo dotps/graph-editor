@@ -26,8 +26,7 @@ public class DrawLine implements IDrawStrategy {
                 continue;
             }
             Line line = new Line(startPointData.x, startPointData.y, pointData.x, pointData.y);
-            drawArea.addLine(line);
-            //drawArea.getChildren().add(line);
+            drawArea.add(line);
             startPointData = null;
         }
 

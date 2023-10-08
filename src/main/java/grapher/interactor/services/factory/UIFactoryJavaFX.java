@@ -60,12 +60,12 @@ public class UIFactoryJavaFX implements IUIFactory {
     public void createUI() {
 
         StackPane root = new StackPane();
+        HBox shapesBox = createShapesMenu();
 
         //Canvas canvas = createCanvas();
         PaneJavaFX drawArea = createDrawArea();
         inputService.setDrawArea(drawArea);
 
-        HBox shapesBox = createShapesMenu();
 
         root.getChildren().add(shapesBox);
         //root.getChildren().add(canvas);
