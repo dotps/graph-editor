@@ -1,15 +1,18 @@
 package grapher.interactor.services.input;
 
+import grapher.data.PointData;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
+import javafx.scene.layout.Pane;
 
 public class InputService implements IInputService {
     private final IDrawService drawService;
     private final ISaveLoadService saveLoadService;
     private final IShapeFactory shapeFactory;
+    private Pane drawArea;
 
     public InputService(IDrawService drawService, ISaveLoadService saveLoadService, IShapeFactory shapeFactory) {
         this.drawService = drawService;
@@ -37,27 +40,32 @@ public class InputService implements IInputService {
             shapeFactory.createPoint(100,100)
         );
 
-        drawService.draw(point);
+        //drawService.draw(point);
         debug.log("=====");
-        drawService.draw(line);
+        //drawService.draw(line);
         debug.log("=====");
-        drawService.draw(rect);
+        //drawService.draw(rect);
         debug.log("=====");
-        drawService.draw(ellipse);
+        //drawService.draw(ellipse);
         debug.log("=====");
 //        drawService.draw(star);
 
         saveLoadService.saveShape(rect.getData());
         IShape loadedShape = saveLoadService.loadShape();
 
-        drawService.draw(loadedShape);
+        //drawService.draw(loadedShape);
 
     }
 
-    public void input(Point start, Point finish, Shapes shapeType) {
-        debug.log(start);
-        debug.log(finish);
-        debug.log(shapeType);
+    public IShape inputShapesHandler(PointData start, PointData finish, Shapes shapeType) {
+        IShape shape = shapeFactory.createShape(start, finish, shapeType);
+        drawService.draw(shape, drawArea);
+        return shape;
+    }
+
+    @Override
+    public void setDrawArea(Pane drawArea) {
+        this.drawArea = drawArea;
     }
 
 }

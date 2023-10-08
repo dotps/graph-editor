@@ -3,16 +3,37 @@ package grapher.interactor.services.draw.strategies;
 import grapher.data.PointData;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
+//import grapher.interactor.shapes.Line;
 import grapher.utils.debug;
+import javafx.scene.layout.Pane;
+
 import java.util.List;
+import javafx.scene.shape.Line;
 
 public class DrawLine implements IDrawStrategy {
+
     @Override
-    public void draw(IShape shape) {
+    public void draw(IShape shape, Pane drawArea) {
         debug.log("DRAW " + shape.getClass().getName());
+
+        PointData startPointData = null;
+
         List<PointData> pointDataList = shape.getAllPointsData();
-        pointDataList.forEach(pointData -> {
-            debug.log("X " + pointData.x + ", Y " + pointData.y);
-        });
+
+        for (PointData pointData : pointDataList) {
+            if (startPointData == null) {
+                startPointData = pointData;
+                continue;
+            }
+            Line line = new Line(startPointData.x, startPointData.y, pointData.x, pointData.y);
+            drawArea.getChildren().add(line);
+            startPointData = null;
+        }
+
+        //pointDataList.forEach(pointData -> {
+        //    debug.log("X " + pointData.x + ", Y " + pointData.y);
+        //});
+
+
     }
 }

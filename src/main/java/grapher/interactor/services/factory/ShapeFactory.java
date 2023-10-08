@@ -1,5 +1,6 @@
 package grapher.interactor.services.factory;
 
+import grapher.data.PointData;
 import grapher.data.ShapeData;
 import grapher.interactor.shapes.*;
 
@@ -26,6 +27,26 @@ public class ShapeFactory implements IShapeFactory {
                 Ellipse ellipse = createEllipse(createPoint(0, 0), radius);
                 ellipse.setData(shapeData);
                 return ellipse;
+            case Star:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public IShape createShape(PointData start, PointData finish, Shapes shapeType) {
+
+        switch (shapeType) {
+            case Point:
+                return createPoint(start.x, start.y);
+            case Line:
+                return createLine(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
+            case Rectangle:
+                return createRect(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
+            case Ellipse:
+                Point radius = createPoint(finish.x, finish.y);
+                return createEllipse(createPoint(start.x, start.y), radius);
             case Star:
                 return null;
             default:

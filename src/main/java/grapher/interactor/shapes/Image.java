@@ -13,6 +13,6 @@ public class Image extends Shape {
         this.shapes = shapes;
 
 //        data = new ImageData(interactor.shapes);
-        setDrawStrategy(new DrawLine());
+        //setDrawStrategy(new DrawLine());
     }
 }

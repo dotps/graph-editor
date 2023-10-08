@@ -1,12 +1,13 @@
 package grapher.interactor.services.draw;
 
 import grapher.interactor.shapes.IShape;
+import javafx.scene.layout.Pane;
 
 public class DrawService implements IDrawService {
 
-    public void draw(IShape shape) {
+    public void draw(IShape shape, Pane drawArea) {
         IDrawStrategy drawStrategy = shape.getDrawStrategy();
-        drawStrategy.draw(shape);
+        drawStrategy.draw(shape, drawArea);
     }
 
 }

@@ -1,28 +1,33 @@
 package grapher.interactor.services.factory;
 
+import grapher.data.PointData;
 import grapher.interactor.services.input.IInputService;
+import grapher.interactor.shapes.IShape;
 import grapher.interactor.shapes.Point;
 import grapher.interactor.shapes.Shapes;
 import grapher.utils.debug;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.shape.Line;
 
 public class UIFactoryJavaFX implements IUIFactory {
 
     private final Stage stage;
     private final IInputService inputService;
-    private Shapes selectedShape = Shapes.Point;
+    private Shapes selectedShape = Shapes.Line;
 
     private Point start;
     private Point finish;
+    private PointData startPointData;
+    private PointData finishPointData;
 
     public UIFactoryJavaFX(Stage stage, IInputService inputService) {
         this.stage = stage;
@@ -54,16 +59,49 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         StackPane root = new StackPane();
 
-        Canvas canvas = createCanvas();
+        //Canvas canvas = createCanvas();
+        Pane drawArea = createDrawArea();
+        inputService.setDrawArea(drawArea);
+
         HBox shapesBox = createShapesMenu();
 
         root.getChildren().add(shapesBox);
-        root.getChildren().add(canvas);
+        //root.getChildren().add(canvas);
+        root.getChildren().add(drawArea);
 
         Scene scene = new Scene(root, 1000, 800);
         stage.setTitle("Graph Editor");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private Pane createDrawArea() {
+
+        Pane drawArea = new Pane();
+
+        drawArea.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            debug.log("MOUSE_PRESSED drawArea");
+            startPointData = new PointData(event.getX(), event.getY());
+        });
+
+        drawArea.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            debug.log("MOUSE_RELEASED drawArea");
+            finish = new Point(event.getX(), event.getY());
+            finishPointData = new PointData(event.getX(), event.getY());
+            IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
+
+            //Line line = new Line(startPointData.x, startPointData.y, finishPointData.x, finishPointData.y);
+            //drawArea.getChildren().add(line);
+
+            startPointData = null;
+            finishPointData = null;
+        });
+
+        drawArea.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+
+        });
+
+        return drawArea;
     }
 
     private Canvas createCanvas() {
@@ -74,7 +112,8 @@ public class UIFactoryJavaFX implements IUIFactory {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
             event -> {
                 debug.log("MOUSE_PRESSED");
-                start = new Point(event.getX(), event.getY());
+                //start = new Point(event.getX(), event.getY());
+                startPointData = new PointData(event.getX(), event.getY());
                 //graphicsContext.beginPath();
                 //graphicsContext.moveTo(event.getX(), event.getY());
                 //graphicsContext.stroke();
@@ -92,9 +131,17 @@ public class UIFactoryJavaFX implements IUIFactory {
             event -> {
                 debug.log("MOUSE_RELEASED");
                 finish = new Point(event.getX(), event.getY());
-                inputService.input(start, finish, selectedShape);
-                finish = null;
-                start = null;
+                finishPointData = new PointData(event.getX(), event.getY());
+                IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
+
+                //graphicsContext.strokeLine();
+
+
+
+                startPointData = null;
+                finishPointData = null;
+                //finish = null;
+                //start = null;
         });
 
         return canvas;
