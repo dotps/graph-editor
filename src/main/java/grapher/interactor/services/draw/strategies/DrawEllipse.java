@@ -23,7 +23,7 @@ public class DrawEllipse implements IDrawStrategy {
 
         List<PointData> pointDataList = shape.getAllPointsData();
         if (pointDataList.size() != COUNT_POINT_FOR_ELLIPSE) {
-            debug.error("DRAW. Неверные данные. Фигура дожна содержать 2 точки.");
+            debug.error("DRAW. Неверные данные. Фигура должна содержать 2 точки.");
             return;
         }
 
@@ -31,10 +31,7 @@ public class DrawEllipse implements IDrawStrategy {
         double radiusX = pointDataList.get(INDEX_RADIUS).x;
         double radiusY = pointDataList.get(INDEX_RADIUS).y;
 
-        Ellipse ellipse = new Ellipse(center.x, center.y, radiusX, radiusY);
-        ellipse.setStroke(Color.ORANGE);
-        ellipse.setFill(null);
-        drawArea.add(ellipse);
+        drawArea.addEllipse(center.x, center.y, radiusX, radiusY);
 
         debug.log("DRAW " + shape.getClass().getName());
     }

@@ -42,14 +42,12 @@ public class DrawLine implements IDrawStrategy {
                 startPointData = pointData;
                 continue;
             }
-            Line line = new Line(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
-            drawArea.add(line);
+            drawArea.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
             prevPointData = pointData;
         }
 
         if (isClosed) {
-            Line line = new Line(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
-            drawArea.add(line);
+            drawArea.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
         }
     }
 }
