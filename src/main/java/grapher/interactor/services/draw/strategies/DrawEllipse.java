@@ -6,6 +6,9 @@ import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 
 import java.util.List;
 
@@ -28,7 +31,11 @@ public class DrawEllipse implements IDrawStrategy {
         double radiusX = pointDataList.get(INDEX_RADIUS).x;
         double radiusY = pointDataList.get(INDEX_RADIUS).y;
 
+        Ellipse ellipse = new Ellipse(center.x, center.y, radiusX, radiusY);
+        ellipse.setStroke(Color.ORANGE);
+        ellipse.setFill(null);
+        drawArea.add(ellipse);
+
         debug.log("DRAW " + shape.getClass().getName());
-        debug.log("X " + center.x + ", Y " + center.y + ", RADIUS X " + radiusX + ", RADIUS Y " + radiusY);
     }
 }
