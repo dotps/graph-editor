@@ -19,10 +19,9 @@ public class InputService implements IInputService {
         this.shapeFactory = shapeFactory;
     }
 
-    public IShape inputShapesHandler(PointData start, PointData finish, Shapes shapeType) {
+    public void inputShapesHandler(PointData start, PointData finish, Shapes shapeType) {
         IShape shape = shapeFactory.createShape(start, finish, shapeType);
         drawService.draw(shape, canvas);
-        return shape;
     }
 
     @Override
@@ -31,39 +30,17 @@ public class InputService implements IInputService {
     }
 
     @Override
-    public void inputShapesHandler() {
-/*
-        Point point = shapeFactory.createPoint(0, 0);
-
-        Line line = shapeFactory.createLine(
-            shapeFactory.createPoint(5, 5),
-            shapeFactory.createPoint(15,15)
-        );
-
+    public void saveShapesHandler() {
         Rectangle rect = shapeFactory.createRect(
             shapeFactory.createPoint(10,10),
             shapeFactory.createPoint(50,50)
         );
-
-        Ellipse ellipse = shapeFactory.createEllipse(
-            shapeFactory.createPoint(10,10),
-            shapeFactory.createPoint(100,100)
-        );
-
-        //drawService.draw(point);
-        debug.log("=====");
-        //drawService.draw(line);
-        debug.log("=====");
-        //drawService.draw(rect);
-        debug.log("=====");
-        //drawService.draw(ellipse);
-        debug.log("=====");
-//        drawService.draw(star);
-
         saveLoadService.saveShape(rect.getData());
-        IShape loadedShape = saveLoadService.loadShape();
+    }
 
-        //drawService.draw(loadedShape);
-*/
+    @Override
+    public void loadShapesHandler() {
+        IShape loadedShape = saveLoadService.loadShape();
+        drawService.draw(loadedShape, canvas);
     }
 }

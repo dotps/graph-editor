@@ -64,24 +64,34 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         CanvasPane canvas = new CanvasPane();
 
+        initMousePressed(canvas);
+        initMouseReleased(canvas);
+        initMouseDragged(canvas);
+
+        return canvas;
+    }
+
+    private void initMousePressed(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             debug.log("MOUSE_PRESSED canvas");
             startPointData = new PointData(event.getX(), event.getY());
         });
+    }
 
+    private void initMouseReleased(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             debug.log("MOUSE_RELEASED canvas");
             finishPointData = new PointData(event.getX(), event.getY());
-            IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
+            inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
 
             startPointData = null;
             finishPointData = null;
         });
+    }
 
+    private static void initMouseDragged(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
 
         });
-
-        return canvas;
     }
 }
