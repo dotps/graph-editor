@@ -5,4 +5,6 @@ import grapher.interactor.shapes.IShape;
 
 public interface IDrawService extends IService {
     void draw(IShape shape, ICanvas canvas);
+
+    void clearCanvas(ICanvas canvas);
 }

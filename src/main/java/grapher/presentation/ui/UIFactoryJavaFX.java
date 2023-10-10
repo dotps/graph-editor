@@ -1,12 +1,13 @@
 package grapher.presentation.ui;
 
 import grapher.interactor.data.PointData;
+import grapher.interactor.services.draw.ICanvas;
 import grapher.presentation.draw.CanvasPane;
 import grapher.interactor.services.input.IInputService;
-import grapher.interactor.shapes.IShape;
 import grapher.interactor.shapes.Shapes;
 import grapher.interactor.services.ui.IUIFactory;
 import grapher.utils.debug;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -39,19 +40,40 @@ public class UIFactoryJavaFX implements IUIFactory {
             button.setOnAction((event) -> selectedShape = shapeType);
             hBox.getChildren().add(button);
         }
+
+        createActionMenu(hBox);
+
         return hBox;
+    }
+
+    public void createActionMenu(HBox hBox) {
+
+        Button button = createButton("Morphing");
+        hBox.getChildren().add(button);
+
+        button = createButton("Save");
+        button.setOnAction((event) -> inputService.saveShapesHandler());
+        hBox.getChildren().add(button);
+
+        button = createButton("Load");
+        button.setOnAction((event) -> inputService.loadShapesHandler());
+        hBox.getChildren().add(button);
+
+        button = createButton("Clear");
+        button.setOnAction((event) -> inputService.clearCanvasHandler());
+        hBox.getChildren().add(button);
     }
 
     @Override
     public void createUI() {
 
         StackPane root = new StackPane();
-        HBox shapesBox = createShapesMenu();
+        HBox menu = createShapesMenu();
 
         CanvasPane canvas = createCanvas();
         inputService.setCanvas(canvas);
 
-        root.getChildren().add(shapesBox);
+        root.getChildren().add(menu);
         root.getChildren().add(canvas);
 
         Scene scene = new Scene(root, 1000, 800);
@@ -83,7 +105,6 @@ public class UIFactoryJavaFX implements IUIFactory {
             debug.log("MOUSE_RELEASED canvas");
             finishPointData = new PointData(event.getX(), event.getY());
             inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
-
             startPointData = null;
             finishPointData = null;
         });

@@ -6,6 +6,7 @@ import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
+import grapher.utils.debug;
 
 public class InputService implements IInputService {
     private final IDrawService drawService;
@@ -41,6 +42,12 @@ public class InputService implements IInputService {
     @Override
     public void loadShapesHandler() {
         IShape loadedShape = saveLoadService.loadShape();
+        drawService.clearCanvas(canvas);
         drawService.draw(loadedShape, canvas);
+    }
+
+    @Override
+    public void clearCanvasHandler() {
+        drawService.clearCanvas(canvas);
     }
 }

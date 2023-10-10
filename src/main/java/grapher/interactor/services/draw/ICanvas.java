@@ -8,4 +8,6 @@ public interface ICanvas {
     void addEllipse(double centerX, double centerY, double radiusX, double radiusY);
 
     void addLine(double startX, double startY, double finishX, double finishY);
+
+    void clear();
 }

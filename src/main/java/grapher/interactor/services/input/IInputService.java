@@ -12,4 +12,6 @@ public interface IInputService extends IService {
     void saveShapesHandler();
 
     void loadShapesHandler();
+
+    void clearCanvasHandler();
 }

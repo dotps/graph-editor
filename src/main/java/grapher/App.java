@@ -4,6 +4,7 @@ import grapher.interactor.services.draw.DrawService;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.factory.ShapeFactory;
+import grapher.interactor.services.ui.IUIFactory;
 import grapher.presentation.ui.UIFactoryJavaFX;
 import grapher.interactor.services.input.IInputService;
 import grapher.interactor.services.input.InputService;
@@ -22,8 +23,9 @@ public class App extends Application {
         IShapeFactory shapeFactory = new ShapeFactory();
         ISaveLoadService saveLoadService = new SaveLoadService(shapeFactory);
         IInputService inputService = new InputService(drawService, saveLoadService, shapeFactory);
+        IUIFactory uiFactory = new UIFactoryJavaFX(stage, inputService);
+        IUIService uiService = new UIService(uiFactory);
 
-        IUIService uiService = new UIService(new UIFactoryJavaFX(stage, inputService));
         uiService.showUI();
 
     }

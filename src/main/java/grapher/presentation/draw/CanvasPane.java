@@ -32,4 +32,9 @@ public class CanvasPane extends Pane implements ICanvas {
         Line line = new Line(startX, startY, finishX, finishY);
         add(line);
     }
+
+    @Override
+    public void clear() {
+        getChildren().clear();
+    }
 }
