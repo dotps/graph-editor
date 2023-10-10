@@ -21,7 +21,7 @@ public class App extends Application {
 
         IDrawService drawService = new DrawService();
         IShapeFactory shapeFactory = new ShapeFactory();
-        ISaveLoadService saveLoadService = new SaveLoadService(shapeFactory);
+        ISaveLoadService saveLoadService = new SaveLoadService(shapeFactory, drawService);
         IInputService inputService = new InputService(drawService, saveLoadService, shapeFactory);
         IUIFactory uiFactory = new UIFactoryJavaFX(stage, inputService);
         IUIService uiService = new UIService(uiFactory);

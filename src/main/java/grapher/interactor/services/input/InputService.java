@@ -1,12 +1,15 @@
 package grapher.interactor.services.input;
 
 import grapher.interactor.data.PointData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
+
+import java.util.List;
 
 public class InputService implements IInputService {
     private final IDrawService drawService;
@@ -32,18 +35,29 @@ public class InputService implements IInputService {
 
     @Override
     public void saveShapesHandler() {
+        /*
         Rectangle rect = shapeFactory.createRect(
             shapeFactory.createPoint(10,10),
             shapeFactory.createPoint(50,50)
         );
         saveLoadService.saveShape(rect.getData());
+         */
+        saveLoadService.save();
     }
 
     @Override
     public void loadShapesHandler() {
-        IShape loadedShape = saveLoadService.loadShape();
         drawService.clearCanvas(canvas);
+        List<IShape> loadedShapes = saveLoadService.load();
+
+        for (IShape shape : loadedShapes) {
+            drawService.draw(shape, canvas);
+        }
+
+        /*
+        IShape loadedShape = saveLoadService.loadShape();
         drawService.draw(loadedShape, canvas);
+         */
     }
 
     @Override

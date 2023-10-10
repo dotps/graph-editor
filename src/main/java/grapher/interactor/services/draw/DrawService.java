@@ -25,4 +25,9 @@ public class DrawService implements IDrawService {
         canvas.clear();
     }
 
+    @Override
+    public List<IShape> getShapesOnCanvas() {
+        return shapesOnCanvas;
+    }
+
 }
