@@ -1,6 +1,6 @@
 package grapher.interactor.shapes;
 
-import grapher.data.PointData;
+import grapher.interactor.data.PointData;
 
 import java.util.ArrayList;
 import java.util.List;

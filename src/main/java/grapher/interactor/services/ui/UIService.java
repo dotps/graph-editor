@@ -1,10 +1,5 @@
 package grapher.interactor.services.ui;
 
-import grapher.interactor.services.factory.IUIFactory;
-import grapher.interactor.services.input.IInputService;
-import grapher.interactor.shapes.Shapes;
-import javafx.scene.Scene;
-
 public class UIService implements IUIService {
 
     private final IUIFactory uiFactory;

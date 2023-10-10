@@ -1,4 +1,4 @@
-package grapher.data;
+package grapher.interactor.data;
 
 import java.io.Serializable;
 import java.util.List;

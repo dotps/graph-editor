@@ -1,10 +1,8 @@
 package grapher.interactor.services.factory;
 
-import grapher.data.PointData;
-import grapher.data.ShapeData;
+import grapher.interactor.data.PointData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.shapes.*;
-
-import java.util.List;
 
 public interface IShapeFactory {
     IShape createShape(ShapeData shapeData);

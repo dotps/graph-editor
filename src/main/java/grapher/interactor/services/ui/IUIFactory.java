@@ -1,4 +1,4 @@
-package grapher.interactor.services.factory;
+package grapher.interactor.services.ui;
 
 import grapher.interactor.shapes.Shapes;
 import javafx.scene.control.Button;

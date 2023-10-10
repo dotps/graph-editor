@@ -1,24 +1,18 @@
-package grapher.interactor.services.factory;
+package grapher.presentation.ui;
 
-import grapher.data.PointData;
-import grapher.interactor.services.draw.ICanvas;
-import grapher.interactor.services.draw.PaneJavaFX;
+import grapher.interactor.data.PointData;
+import grapher.presentation.draw.CanvasPane;
 import grapher.interactor.services.input.IInputService;
 import grapher.interactor.shapes.IShape;
-import grapher.interactor.shapes.Point;
 import grapher.interactor.shapes.Shapes;
+import grapher.interactor.services.ui.IUIFactory;
 import grapher.utils.debug;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.shape.Line;
 
 public class UIFactoryJavaFX implements IUIFactory {
     private final Stage stage;
@@ -54,11 +48,11 @@ public class UIFactoryJavaFX implements IUIFactory {
         StackPane root = new StackPane();
         HBox shapesBox = createShapesMenu();
 
-        PaneJavaFX drawArea = createDrawArea();
-        inputService.setDrawArea(drawArea);
+        CanvasPane canvas = createCanvas();
+        inputService.setCanvas(canvas);
 
         root.getChildren().add(shapesBox);
-        root.getChildren().add(drawArea);
+        root.getChildren().add(canvas);
 
         Scene scene = new Scene(root, 1000, 800);
         stage.setTitle("Graph Editor");
@@ -66,17 +60,17 @@ public class UIFactoryJavaFX implements IUIFactory {
         stage.show();
     }
 
-    private PaneJavaFX createDrawArea() {
+    private CanvasPane createCanvas() {
 
-        PaneJavaFX drawArea = new PaneJavaFX();
+        CanvasPane canvas = new CanvasPane();
 
-        drawArea.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            debug.log("MOUSE_PRESSED drawArea");
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            debug.log("MOUSE_PRESSED canvas");
             startPointData = new PointData(event.getX(), event.getY());
         });
 
-        drawArea.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-            debug.log("MOUSE_RELEASED drawArea");
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            debug.log("MOUSE_RELEASED canvas");
             finishPointData = new PointData(event.getX(), event.getY());
             IShape shape = inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
 
@@ -84,10 +78,10 @@ public class UIFactoryJavaFX implements IUIFactory {
             finishPointData = null;
         });
 
-        drawArea.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
 
         });
 
-        return drawArea;
+        return canvas;
     }
 }

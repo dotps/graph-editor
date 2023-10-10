@@ -1,6 +1,6 @@
 package grapher.interactor.services.draw.strategies;
 
-import grapher.data.PointData;
+import grapher.interactor.data.PointData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
@@ -8,7 +8,6 @@ import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
 
 import java.util.List;
-import javafx.scene.shape.Line;
 
 public class DrawLine implements IDrawStrategy {
 
@@ -24,7 +23,7 @@ public class DrawLine implements IDrawStrategy {
     }
 
     @Override
-    public void draw(IShape shape, ICanvas drawArea) {
+    public void draw(IShape shape, ICanvas canvas) {
 
         debug.log("DRAW " + shape.getClass().getName());
 
@@ -42,12 +41,12 @@ public class DrawLine implements IDrawStrategy {
                 startPointData = pointData;
                 continue;
             }
-            drawArea.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
+            canvas.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
             prevPointData = pointData;
         }
 
         if (isClosed) {
-            drawArea.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
+            canvas.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
         }
     }
 }

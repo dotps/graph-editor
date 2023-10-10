@@ -1,7 +1,7 @@
 package grapher.interactor.shapes;
 
-import grapher.data.PointData;
-import grapher.data.ShapeData;
+import grapher.interactor.data.PointData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.strategies.DrawPoint;
 
 import java.util.ArrayList;

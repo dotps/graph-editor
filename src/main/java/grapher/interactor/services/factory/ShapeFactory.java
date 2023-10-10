@@ -1,7 +1,7 @@
 package grapher.interactor.services.factory;
 
-import grapher.data.PointData;
-import grapher.data.ShapeData;
+import grapher.interactor.data.PointData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.shapes.*;
 
 public class ShapeFactory implements IShapeFactory {
@@ -45,9 +45,6 @@ public class ShapeFactory implements IShapeFactory {
             case Rectangle:
                 return createRect(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
             case Ellipse:
-                //Point radius = createPoint(finish.x, finish.y);
-                //Point radius = createPoint(finish.x, finish.y);
-                //return createEllipse(createPoint(start.x, start.y), radius);
                 return createEllipse(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
             //case Star:
             //    return null;
@@ -59,18 +56,12 @@ public class ShapeFactory implements IShapeFactory {
     public Point createPoint(double x, double y) {
         return new Point(x, y);
     }
-
     public Line createLine(Point pointStart, Point pointFinish) {
         return new Line(pointStart, pointFinish);
     }
-
     public Rectangle createRect(Point pointStart, Point pointFinish) {
         return new Rectangle(pointStart, pointFinish);
     }
-
-    //public Ellipse createEllipse(Point centerPoint, Point radius) {
-    //    return new Ellipse(centerPoint, radius);
-    //}
     public Ellipse createEllipse(Point pointStart, Point pointFinish) {
         return new Ellipse(pointStart, pointFinish);
     }

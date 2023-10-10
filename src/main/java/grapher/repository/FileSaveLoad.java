@@ -1,7 +1,7 @@
 package grapher.repository;
 
 import java.io.*;
-import grapher.data.ShapeData;
+import grapher.interactor.data.ShapeData;
 import grapher.utils.debug;
 
 public class FileSaveLoad implements ISaveLoad {

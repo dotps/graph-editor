@@ -1,6 +1,6 @@
 package grapher.interactor.services.saveload;
 
-import grapher.data.ShapeData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.shapes.IShape;
 import grapher.repository.FileSaveLoad;

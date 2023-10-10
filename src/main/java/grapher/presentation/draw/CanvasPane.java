@@ -1,14 +1,15 @@
-package grapher.interactor.services.draw;
+package grapher.presentation.draw;
 
+import grapher.interactor.services.draw.ICanvas;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
-public class PaneJavaFX extends Pane implements ICanvas {
+public class CanvasPane extends Pane implements ICanvas {
 
-    public PaneJavaFX() {
+    public CanvasPane() {
         setMaxSize(1000, 700);
         setStyle("-fx-border-width: 5; -fx-border-color: gray;");
     }
