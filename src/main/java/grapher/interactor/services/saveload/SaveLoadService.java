@@ -21,20 +21,6 @@ public class SaveLoadService implements ISaveLoadService {
         this.drawService = drawService;
     }
 
-    public void saveShape(ShapeData data) {
-        if (saveLoad.saveShapeData(data))
-            debug.log("SAVED " + data);
-    }
-
-    public IShape loadShape() {
-
-        ShapeData shapeData = saveLoad.loadShapeData();
-        IShape shape = shapeFactory.createShape(shapeData);
-        debug.log("LOADED");
-
-        return shape;
-    }
-
     @Override
     public void save() {
         List<IShape> shapes = drawService.getShapesOnCanvas();
@@ -61,6 +47,4 @@ public class SaveLoadService implements ISaveLoadService {
         debug.log("LOADED");
         return shapes;
     }
-
-
 }
