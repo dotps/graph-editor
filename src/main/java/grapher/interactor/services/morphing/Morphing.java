@@ -17,6 +17,10 @@ public class Morphing {
     public void startMorph() {
         List<IShape> shapesOnCanvas = drawService.getShapesOnCanvas();
         List<IShape> shapesForMorphing = new ArrayList<>();
+
+        if (shapesOnCanvas.size() < 2)
+            return;
+
         shapesForMorphing.add(shapesOnCanvas.get(0));
         shapesForMorphing.add(shapesOnCanvas.get(1));
     }
