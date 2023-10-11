@@ -49,6 +49,7 @@ public class UIFactoryJavaFX implements IUIFactory {
     public void createActionMenu(HBox hBox) {
 
         Button button = createButton("Morphing");
+        button.setOnAction((event) -> inputService.startMorphingHandler());
         hBox.getChildren().add(button);
 
         button = createButton("Save");

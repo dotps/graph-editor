@@ -5,6 +5,7 @@ import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
+import grapher.interactor.services.morphing.Morphing;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
@@ -35,13 +36,6 @@ public class InputService implements IInputService {
 
     @Override
     public void saveShapesHandler() {
-        /*
-        Rectangle rect = shapeFactory.createRect(
-            shapeFactory.createPoint(10,10),
-            shapeFactory.createPoint(50,50)
-        );
-        saveLoadService.saveShape(rect.getData());
-         */
         saveLoadService.save();
     }
 
@@ -53,15 +47,19 @@ public class InputService implements IInputService {
         for (IShape shape : loadedShapes) {
             drawService.draw(shape, canvas);
         }
-
-        /*
-        IShape loadedShape = saveLoadService.loadShape();
-        drawService.draw(loadedShape, canvas);
-         */
     }
 
     @Override
     public void clearCanvasHandler() {
         drawService.clearCanvas(canvas);
+    }
+
+    @Override
+    public void startMorphingHandler() {
+        debug.log("MORPHING");
+        loadShapesHandler();
+        Morphing morphing = new Morphing(drawService);
+        morphing.startMorph();
+
     }
 }
