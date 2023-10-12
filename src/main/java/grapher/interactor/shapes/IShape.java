@@ -11,4 +11,5 @@ public interface IShape {
     PointData getFirstPointData();
     List<PointData> getAllPointsData();
     ShapeData getData();
+    List<PointData> getPointsDataForMorph(int countPoint);
 }

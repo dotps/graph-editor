@@ -25,4 +25,9 @@ public class Line extends Shape {
     private void injectDrawStrategy() {
         setDrawStrategy(new DrawLine());
     }
+
+    @Override
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+        return null;
+    }
 }

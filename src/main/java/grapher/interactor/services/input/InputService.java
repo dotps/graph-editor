@@ -57,9 +57,8 @@ public class InputService implements IInputService {
     @Override
     public void startMorphingHandler() {
         debug.log("MORPHING");
-        loadShapesHandler();
-        Morphing morphing = new Morphing(drawService);
-        morphing.startMorph();
+        //loadShapesHandler();
+        Morphing morphing = new Morphing(drawService, canvas);
 
     }
 }

@@ -5,6 +5,7 @@ import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class DrawEllipse implements IDrawStrategy {
         double radiusX = pointDataList.get(INDEX_RADIUS).x;
         double radiusY = pointDataList.get(INDEX_RADIUS).y;
 
-        canvas.addEllipse(center.x, center.y, radiusX, radiusY);
+        canvas.addEllipse(center.x, center.y, radiusX, radiusY, Color.BLACK, 1);
 
         debug.log("DRAW " + shape.getClass().getName());
     }

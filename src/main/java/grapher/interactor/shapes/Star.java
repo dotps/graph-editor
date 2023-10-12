@@ -1,5 +1,7 @@
 package grapher.interactor.shapes;
 
+import grapher.interactor.data.PointData;
+
 import java.util.List;
 
 public class Star extends Shape {
@@ -11,5 +13,9 @@ public class Star extends Shape {
 //        setDrawStrategy(new DrawStar());
     }
 
+    @Override
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+        return null;
+    }
 
 }

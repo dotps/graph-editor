@@ -1,5 +1,6 @@
 package grapher.interactor.data;
 
+import java.awt.*;
 import java.io.Serializable;
 
 public class PointData implements Serializable {

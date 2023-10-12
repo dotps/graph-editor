@@ -6,13 +6,13 @@ import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 //import grapher.interactor.shapes.Line;
 import grapher.utils.debug;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
 public class DrawLine implements IDrawStrategy {
 
     private Boolean isClosed = false;
-
     public DrawLine(Boolean isClosed) {
 
         this.isClosed = isClosed;
@@ -41,12 +41,12 @@ public class DrawLine implements IDrawStrategy {
                 startPointData = pointData;
                 continue;
             }
-            canvas.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y);
+            canvas.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y, Color.BLACK, 1);
             prevPointData = pointData;
         }
 
         if (isClosed) {
-            canvas.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y);
+            canvas.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y, Color.BLACK, 1);
         }
     }
 }

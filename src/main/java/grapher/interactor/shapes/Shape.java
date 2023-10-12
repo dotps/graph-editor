@@ -38,6 +38,11 @@ public abstract class Shape implements IShape {
     }
 
     @Override
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "Shape{" +
                 "data=" + data +

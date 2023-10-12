@@ -1,7 +1,10 @@
 package grapher.interactor.services.draw;
 
+import grapher.interactor.data.PointData;
 import grapher.interactor.shapes.IShape;
+import grapher.interactor.shapes.Point;
 import grapher.utils.debug;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -28,6 +31,12 @@ public class DrawService implements IDrawService {
     @Override
     public List<IShape> getShapesOnCanvas() {
         return shapesOnCanvas;
+    }
+
+    @Override
+    public void drawText(String text, Point point, ICanvas canvas) {
+        PointData pointData = point.getFirstPointData();
+        canvas.addText(text, pointData.x, pointData.y);
     }
 
 }

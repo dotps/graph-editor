@@ -1,5 +1,6 @@
 package grapher.interactor.shapes;
 
+import grapher.interactor.data.PointData;
 import grapher.interactor.services.draw.strategies.DrawLine;
 
 import java.util.ArrayList;
@@ -14,5 +15,10 @@ public class Image extends Shape {
 
 //        data = new ImageData(interactor.shapes);
         //setDrawStrategy(new DrawLine());
+    }
+
+    @Override
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+        return null;
     }
 }

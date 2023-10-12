@@ -24,4 +24,21 @@ public class EllipseCalc {
         return pointDataList;
     }
 
+    public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
+
+        List<PointData> pointsData = new ArrayList<>();
+
+        int offset = 45;
+        int iterationAngle = Math.round(-360 / countPoint);
+        double currentAngle = 0;
+
+        for (int i = 0; i < countPoint; i++) {
+            currentAngle = iterationAngle * i + iterationAngle - offset;
+            double x = center.x + radius.x * Math.sin(Math.toRadians(currentAngle));
+            double y = center.y + radius.y * Math.cos(Math.toRadians(currentAngle));
+            pointsData.add(new PointData(x,y));
+        }
+
+        return pointsData;
+    }
 }

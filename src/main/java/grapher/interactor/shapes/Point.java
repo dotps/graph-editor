@@ -26,4 +26,15 @@ public class Point extends Shape {
         setDrawStrategy(new DrawPoint());
     }
 
+    @Override
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+        return null;
+    }
+
+    public static PointData diff(PointData pointDataStart, PointData pointDataFinish) {
+        double newX = Math.abs(pointDataStart.x - pointDataFinish.x);
+        double newY = Math.abs(pointDataStart.y - pointDataFinish.y);
+        return new PointData(newX, newY);
+    }
+
 }

@@ -5,6 +5,7 @@ import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
 import grapher.utils.debug;
+import javafx.scene.paint.Color;
 
 public class DrawPoint implements IDrawStrategy {
     @Override
@@ -13,6 +14,6 @@ public class DrawPoint implements IDrawStrategy {
         debug.log("DRAW " + shape.getClass().getName());
 
         PointData pointData = shape.getFirstPointData();
-        canvas.addLine(pointData.x, pointData.y, pointData.x, pointData.y);
+        canvas.addLine(pointData.x, pointData.y, pointData.x, pointData.y, Color.RED, 5);
     }
 }
