@@ -36,7 +36,7 @@ public class DrawService implements IDrawService {
     @Override
     public void drawText(String text, Point point, ICanvas canvas) {
         PointData pointData = point.getFirstPointData();
-        canvas.addText(text, pointData.x, pointData.y);
+        canvas.addText(text, pointData.getX(), pointData.getY());
     }
 
 }

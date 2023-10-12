@@ -3,7 +3,6 @@ package grapher.repository;
 import java.io.*;
 import java.util.List;
 
-import grapher.interactor.data.SaveData;
 import grapher.interactor.data.ShapeData;
 import grapher.utils.debug;
 

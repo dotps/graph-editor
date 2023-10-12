@@ -41,12 +41,12 @@ public class DrawLine implements IDrawStrategy {
                 startPointData = pointData;
                 continue;
             }
-            canvas.addLine(prevPointData.x, prevPointData.y, pointData.x, pointData.y, Color.BLACK, 1);
+            canvas.addLine(prevPointData.getX(), prevPointData.getY(), pointData.getX(), pointData.getY(), Color.BLACK, 1);
             prevPointData = pointData;
         }
 
         if (isClosed) {
-            canvas.addLine(prevPointData.x, prevPointData.y, startPointData.x, startPointData.y, Color.BLACK, 1);
+            canvas.addLine(prevPointData.getX(), prevPointData.getY(), startPointData.getX(), startPointData.getY(), Color.BLACK, 1);
         }
     }
 }

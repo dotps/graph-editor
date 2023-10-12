@@ -22,11 +22,11 @@ public abstract class Shape implements IShape {
     }
 
     public List<PointData> getAllPointsData() {
-        return data.points;
+        return data.getPoints();
     }
 
     public PointData getFirstPointData() {
-        return data.points.get(0);
+        return data.getPoints().get(0);
     }
 
     public void setData(ShapeData data) {

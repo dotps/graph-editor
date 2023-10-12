@@ -11,12 +11,12 @@ public class EllipseCalc {
 
         List<PointData> pointDataList = new ArrayList<>();
 
-        double lengthSideX = pointFinishData.x - pointStartData.x;
-        double lengthSideY = pointFinishData.y - pointStartData.y;
+        double lengthSideX = pointFinishData.getX() - pointStartData.getX();
+        double lengthSideY = pointFinishData.getY() - pointStartData.getY();
         double radiusX = Math.abs(lengthSideX / 2);
         double radiusY = Math.abs(lengthSideY / 2);
-        double x = pointStartData.x + lengthSideX / 2;
-        double y = pointStartData.y + lengthSideY / 2;
+        double x = pointStartData.getX() + lengthSideX / 2;
+        double y = pointStartData.getY() + lengthSideY / 2;
 
         pointDataList.add(new PointData(x, y));
         pointDataList.add(new PointData(radiusX, radiusY));
@@ -34,8 +34,8 @@ public class EllipseCalc {
 
         for (int i = 0; i < countPoint; i++) {
             currentAngle = iterationAngle * i + iterationAngle - offset;
-            double x = center.x + radius.x * Math.sin(Math.toRadians(currentAngle));
-            double y = center.y + radius.y * Math.cos(Math.toRadians(currentAngle));
+            double x = center.getX() + radius.getX() * Math.sin(Math.toRadians(currentAngle));
+            double y = center.getY() + radius.getY() * Math.cos(Math.toRadians(currentAngle));
             pointsData.add(new PointData(x,y));
         }
 

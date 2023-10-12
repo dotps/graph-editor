@@ -25,10 +25,10 @@ public class Ellipse extends Shape {
     }
 
     public PointData getRadius() {
-        return getData().points.get(1);
+        return getData().getPoints().get(1);
     }
     public PointData getCenter() {
-        return getData().points.get(0);
+        return getData().getPoints().get(0);
     }
 
     @Override

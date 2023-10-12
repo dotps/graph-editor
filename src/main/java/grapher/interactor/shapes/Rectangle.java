@@ -28,13 +28,16 @@ public class Rectangle extends Shape {
     @Override
     public List<PointData> getPointsDataForMorph(int countPoint) {
 
+        // x = x0 * cosθ − y0 * sinθ
+        // y = x0 * sinθ + y0 * cos
+
         List<PointData> pointsData = getAllPointsData();
 
         int diffCount = countPoint - pointsData.size();
         debug.log("diffCount " + diffCount);
 
         for (PointData pointData : pointsData) {
-            debug.log(pointData.x + " " + pointData.y);
+            debug.log(pointData.getX() + " " + pointData.getY());
         }
         debug.log("===");
 
@@ -43,11 +46,11 @@ public class Rectangle extends Shape {
             PointData pointData1 = pointsData.get(diffCount);
             PointData pointData2 = pointsData.get(diffCount+1);
 
-            double x = pointData1.x - (pointData1.x - pointData2.x) / 2;
-            double y = pointData1.y - (pointData1.y - pointData2.y) / 2;
+            double x = pointData1.getX() - (pointData1.getX() - pointData2.getX()) / 2;
+            double y = pointData1.getY() - (pointData1.getY() - pointData2.getY()) / 2;
 
-            debug.log(pointData1.x + " " + pointData1.y);
-            debug.log(pointData2.x + " " + pointData2.y);
+            debug.log(pointData1.getX() + " " + pointData1.getY());
+            debug.log(pointData2.getX() + " " + pointData2.getY());
             debug.log(x + " insert " + diffCount+1 + " << " + y);
             debug.log("---");
 
@@ -58,30 +61,9 @@ public class Rectangle extends Shape {
 
         debug.log("*****");
         for (PointData pointData : pointsData) {
-            debug.log(pointData.x + " " + pointData.y);
+            debug.log(pointData.getX() + " " + pointData.getY());
         }
 
         return pointsData;
-
-//        int i = 1;
-//        for (int i = 0; i <= pointsData.size() - 1; i++) {
-//        for (PointData pointData : pointsData) {
-
-//            debug.log(pointsData.get(i));
-
-//            if (i > diffCount)
-//                break;
-//            i++;
-//        }
-
-
-//        int shapePointCount = getData().points.size();
-//        if (shapePointCount == countPoint)
-//            return getAllPointsData();
-////        else if (shapePointCount < countPoint)
-//            //
-////
-//
-//        return null;
     }
 }

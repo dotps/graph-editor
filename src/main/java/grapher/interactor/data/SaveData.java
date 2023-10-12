@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaveData implements Serializable {
-    public List<ShapeData> shapes;
+    private List<ShapeData> shapes;
 }

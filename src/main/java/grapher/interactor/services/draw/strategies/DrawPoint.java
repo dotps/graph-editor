@@ -14,6 +14,6 @@ public class DrawPoint implements IDrawStrategy {
         debug.log("DRAW " + shape.getClass().getName());
 
         PointData pointData = shape.getFirstPointData();
-        canvas.addLine(pointData.x, pointData.y, pointData.x, pointData.y, Color.RED, 5);
+        canvas.addLine(pointData.getX(), pointData.getY(), pointData.getX(), pointData.getY(), Color.RED, 5);
     }
 }

@@ -3,11 +3,10 @@ package grapher.interactor.data;
 import java.io.Serializable;
 import java.util.List;
 import grapher.interactor.shapes.Shapes;
-import java.awt.Color;
 
 public class ShapeData implements Serializable {
-    public List<PointData> points;
-    public final Shapes shapeType;
+    private final List<PointData> points;
+    private final Shapes shapeType;
 
     public ShapeData(List<PointData> points, Shapes shapeType) {
         this.points = points;
@@ -17,9 +16,16 @@ public class ShapeData implements Serializable {
     @Override
     public String toString() {
         return "ShapeData{" +
-                "points=" + points +
-                ", shapeType=" + shapeType +
+                "points=" + getPoints() +
+                ", shapeType=" + getShapeType() +
                 '}';
     }
 
+    public List<PointData> getPoints() {
+        return points;
+    }
+
+    public Shapes getShapeType() {
+        return shapeType;
+    }
 }

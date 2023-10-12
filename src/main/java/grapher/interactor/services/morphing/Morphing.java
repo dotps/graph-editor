@@ -50,7 +50,7 @@ public class Morphing {
     private void drawLogMorphPoint(List<PointData> points) {
         int i = 1;
         for (PointData pointData : points) {
-            Point point = new Point(pointData.x, pointData.y);
+            Point point = new Point(pointData.getX(), pointData.getY());
             drawService.draw(point, canvas);
             drawService.drawText(Integer.toString(i), point, canvas);
             i++;
@@ -63,12 +63,12 @@ public class Morphing {
 
             PointData pointStartData = pointsStartShape.get(i);
             PointData pointFinishData = pointsFinishShape.get(i);
-            PointData length = Point.diff(pointStartData, pointFinishData);
+            PointData length = Point.diffData(pointStartData, pointFinishData);
 
-            debug.log("X " + length.x + ", Y " + length.y);
+            debug.log("X " + length.getX() + ", Y " + length.getY());
 
-            PointData morphPointData = new PointData(pointStartData.x + length.x / 2, pointStartData.y + length.y / 2);
-            Point morphPoint = new Point(morphPointData.x, morphPointData.y);
+            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() / 2, pointStartData.getY() + length.getY() / 2);
+            Point morphPoint = new Point(morphPointData.getX(), morphPointData.getY());
 
             drawService.draw(morphPoint, canvas);
             drawService.drawText(Integer.toString(i+1), morphPoint, canvas);

@@ -9,7 +9,7 @@ public class ShapeFactory implements IShapeFactory {
     @Override
     public IShape createShape(ShapeData shapeData) {
 
-        switch (shapeData.shapeType) {
+        switch (shapeData.getShapeType()) {
             case Point:
                 Point point = createPoint(0,0);
                 point.setData(shapeData);
@@ -39,13 +39,13 @@ public class ShapeFactory implements IShapeFactory {
 
         switch (shapeType) {
             case Point:
-                return createPoint(start.x, start.y);
+                return createPoint(start.getX(), start.getY());
             case Line:
-                return createLine(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
+                return createLine(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
             case Rectangle:
-                return createRect(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
+                return createRect(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
             case Ellipse:
-                return createEllipse(createPoint(start.x, start.y), createPoint(finish.x, finish.y));
+                return createEllipse(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
             //case Star:
             //    return null;
             default:

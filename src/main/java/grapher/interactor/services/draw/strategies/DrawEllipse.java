@@ -25,10 +25,10 @@ public class DrawEllipse implements IDrawStrategy {
         }
 
         PointData center = pointDataList.get(INDEX_POINT);
-        double radiusX = pointDataList.get(INDEX_RADIUS).x;
-        double radiusY = pointDataList.get(INDEX_RADIUS).y;
+        double radiusX = pointDataList.get(INDEX_RADIUS).getX();
+        double radiusY = pointDataList.get(INDEX_RADIUS).getY();
 
-        canvas.addEllipse(center.x, center.y, radiusX, radiusY, Color.BLACK, 1);
+        canvas.addEllipse(center.getX(), center.getY(), radiusX, radiusY, Color.BLACK, 1);
 
         debug.log("DRAW " + shape.getClass().getName());
     }
