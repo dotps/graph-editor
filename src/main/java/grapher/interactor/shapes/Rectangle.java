@@ -5,6 +5,7 @@ import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.strategies.DrawLine;
 import grapher.utils.debug;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle extends Shape {
@@ -25,10 +26,9 @@ public class Rectangle extends Shape {
         setDrawStrategy(new DrawLine(true));
     }
 
+    /*
     @Override
     public List<PointData> getPointsDataForMorph(int countPoint) {
-
-        /*
 
         List<PointData> pointsData = getAllPointsData();
 
@@ -65,9 +65,96 @@ public class Rectangle extends Shape {
 
         return pointsData;
 
-         */
 
         return null;
+    }
+*/
+    public List<PointData> getPointsDataForMorph(int countPoint) {
+
+        List<PointData> points = new ArrayList<>();
+
+        int perimeter = getPerimeter();
+        double distance = perimeter / countPoint;
+
+        debug.log("countPoint " + countPoint);
+        debug.log("perimeter " + perimeter);
+        debug.log("distance " + distance);
+
+        List<PointData> pointsData = getData().getPoints();
+
+        for (int i = 0; i < pointsData.size(); i++) {
+
+            double x1 = pointsData.get(i).getX();
+            double y1 = pointsData.get(i).getY();
+
+            debug.log(x1 + "<<< = >>>" + y1);
+
+            double x2, y2;
+
+            if (i+1 <= pointsData.size()-1) {
+                x2 = pointsData.get(i + 1).getX();
+                y2 = pointsData.get(i + 1).getY();
+            }
+            else {
+                x2 = pointsData.get(0).getX();
+                y2 = pointsData.get(0).getY();
+            }
+
+            debug.log(x2 + "<<< + >>>" + y2);
+
+            double xx = x1;
+            double yy = y1;
+
+//            points.add(new PointData(xx,yy));
+
+            if (x1 - x2 < 0) {
+                while (xx < x2) {
+                    xx += distance;
+                    if (xx >= x2)
+                        break;
+                    if (Math.abs(xx - x2) < distance / 2)
+                        break;
+                    PointData point = new PointData(xx, yy);
+                    points.add(point);
+                    debug.log(points.size() + ")" + point.getX() + "=" + point.getY());
+                }
+            }
+
+            if (y1 - y2 < 0) {
+                while (yy < y2) {
+                    yy += distance;
+                    if (yy >= y2)
+                        break;
+                    PointData point = new PointData(xx, yy);
+                    points.add(point);
+                    debug.log(points.size() + ")" + point.getX() + "=" + point.getY());
+                }
+            }
+            if (x1 - x2 >= 0) {
+                while (xx > x2) {
+                    xx -= distance;
+                    if (xx <= x2)
+                        break;
+                    PointData point = new PointData(xx, yy);
+                    points.add(point);
+                    debug.log(points.size() + ")" + point.getX() + "=" + point.getY());
+                }
+            }
+            if (y1 - y2 >= 0) {
+                while (yy > y2) {
+                    yy -= distance;
+                    if (yy <= y2)
+                        break;
+                    PointData point = new PointData(xx, yy);
+                    points.add(point);
+                    debug.log(points.size() + ")" + point.getX() + "=" + point.getY());
+                }
+            }
+        }
+
+        debug.log("points" + points.size());
+
+        return points;
     }
 
     @Override

@@ -7,9 +7,11 @@ import grapher.interactor.services.input.IInputService;
 import grapher.interactor.shapes.Shapes;
 import grapher.interactor.services.ui.IUIFactory;
 import grapher.utils.debug;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -77,10 +79,32 @@ public class UIFactoryJavaFX implements IUIFactory {
         root.getChildren().add(menu);
         root.getChildren().add(canvas);
 
+        HBox sliderBox = createSlider();
+        root.getChildren().add(sliderBox);
+
         Scene scene = new Scene(root, 1000, 800);
         stage.setTitle("Graph Editor");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private static HBox createSlider() {
+        HBox sliderBox = new HBox();
+
+        Slider slider = new Slider(0.0, 10.0, 0.0);
+        slider.setPrefWidth(1000);
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setBlockIncrement(2.0);
+        slider.setMajorTickUnit(5.0);
+        slider.setMinorTickCount(4);
+        slider.setSnapToTicks(true);
+
+        sliderBox.getChildren().add(slider);
+        sliderBox.setAlignment(Pos.BOTTOM_CENTER);
+        sliderBox.setPadding(new Insets(20, 10, 20, 10));
+
+        return sliderBox;
     }
 
     private CanvasPane createCanvas() {
