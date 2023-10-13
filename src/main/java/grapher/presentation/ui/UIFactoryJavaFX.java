@@ -71,16 +71,17 @@ public class UIFactoryJavaFX implements IUIFactory {
     public void createUI() {
 
         StackPane root = new StackPane();
+//        root.setAlignment(Pos.TOP_CENTER);
         HBox menu = createShapesMenu();
 
         CanvasPane canvas = createCanvas();
         inputService.setCanvas(canvas);
 
+        Slider slider = createSlider();
+        menu.getChildren().add(slider);
+
         root.getChildren().add(menu);
         root.getChildren().add(canvas);
-
-        HBox sliderBox = createSlider();
-        root.getChildren().add(sliderBox);
 
         Scene scene = new Scene(root, 1000, 800);
         stage.setTitle("Graph Editor");
@@ -88,11 +89,10 @@ public class UIFactoryJavaFX implements IUIFactory {
         stage.show();
     }
 
-    private static HBox createSlider() {
-        HBox sliderBox = new HBox();
+    private Slider createSlider() {
 
         Slider slider = new Slider(0.0, 10.0, 0.0);
-        slider.setPrefWidth(1000);
+        slider.setPrefWidth(500);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
         slider.setBlockIncrement(2.0);
@@ -100,11 +100,16 @@ public class UIFactoryJavaFX implements IUIFactory {
         slider.setMinorTickCount(4);
         slider.setSnapToTicks(true);
 
-        sliderBox.getChildren().add(slider);
-        sliderBox.setAlignment(Pos.BOTTOM_CENTER);
-        sliderBox.setPadding(new Insets(20, 10, 20, 10));
+        slider.setOnMouseReleased(event -> {
+            inputService.morphSliderChanged(slider.getValue());
+        });
 
-        return sliderBox;
+//        HBox sliderBox = new HBox();
+//        sliderBox.getChildren().add(slider);
+//        sliderBox.setAlignment(Pos.BOTTOM_CENTER);
+//        sliderBox.setMaxHeight(100);
+
+        return slider;
     }
 
     private CanvasPane createCanvas() {

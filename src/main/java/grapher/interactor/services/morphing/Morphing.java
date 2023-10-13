@@ -23,7 +23,7 @@ public class Morphing {
         init();
     }
 
-    private void init() {
+    public void init() {
 
         List<IShape> shapesOnCanvas = drawService.getShapesOnCanvas();
 

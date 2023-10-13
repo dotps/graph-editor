@@ -15,4 +15,6 @@ public interface IInputService extends IService {
 
     void clearCanvasHandler();
     void startMorphingHandler();
+
+    void morphSliderChanged(double value);
 }
