@@ -28,8 +28,7 @@ public class Rectangle extends Shape {
     @Override
     public List<PointData> getPointsDataForMorph(int countPoint) {
 
-        // x = x0 * cosθ − y0 * sinθ
-        // y = x0 * sinθ + y0 * cos
+        /*
 
         List<PointData> pointsData = getAllPointsData();
 
@@ -65,5 +64,14 @@ public class Rectangle extends Shape {
         }
 
         return pointsData;
+
+         */
+
+        return null;
+    }
+
+    @Override
+    public int getPerimeter() {
+        return RectangleCalc.getPerimeter(getData().getPoints());
     }
 }

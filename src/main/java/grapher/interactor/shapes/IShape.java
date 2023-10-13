@@ -12,4 +12,5 @@ public interface IShape {
     List<PointData> getAllPointsData();
     ShapeData getData();
     List<PointData> getPointsDataForMorph(int countPoint);
+    int getPerimeter();
 }

@@ -38,13 +38,21 @@ public class Morphing {
 
         int maxCountShapePoints = (countStartShapePoints >= countFinishShapePoints) ? countStartShapePoints : countFinishShapePoints;
 
-        List<PointData> pointsStartShape = startShape.getPointsDataForMorph(maxCountShapePoints);
-        List<PointData> pointsFinishShape = finishShape.getPointsDataForMorph(maxCountShapePoints);
+        int startShapePerimeter = startShape.getPerimeter();
+        int finishShapePerimeter = finishShape.getPerimeter();
+        debug.log(startShapePerimeter);
+        debug.log(finishShapePerimeter);
 
-        drawLogMorphPoint(pointsStartShape);
+        int minCountShapePoints = (startShapePerimeter <= finishShapePerimeter) ? startShapePerimeter : finishShapePerimeter;
+        debug.log("minCountShapePoints " + minCountShapePoints);
+
+        List<PointData> pointsStartShape = startShape.getPointsDataForMorph(minCountShapePoints);
+        List<PointData> pointsFinishShape = finishShape.getPointsDataForMorph(minCountShapePoints);
+
+//        drawLogMorphPoint(pointsStartShape);
         drawLogMorphPoint(pointsFinishShape);
 
-        startMorph(pointsStartShape, pointsFinishShape);
+//        startMorph(pointsStartShape, pointsFinishShape);
     }
 
     private void drawLogMorphPoint(List<PointData> points) {
@@ -71,7 +79,7 @@ public class Morphing {
             Point morphPoint = new Point(morphPointData.getX(), morphPointData.getY());
 
             drawService.draw(morphPoint, canvas);
-            drawService.drawText(Integer.toString(i+1), morphPoint, canvas);
+            drawService.drawText(Integer.toString(i + 1), morphPoint, canvas);
         }
     }
 }

@@ -1,6 +1,7 @@
 package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
+import grapher.utils.debug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class EllipseCalc {
         return pointDataList;
     }
 
+    /*
     public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
 
         List<PointData> pointsData = new ArrayList<>();
@@ -40,5 +42,31 @@ public class EllipseCalc {
         }
 
         return pointsData;
+    }
+     */
+
+    public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
+
+        List<PointData> pointsData = new ArrayList<>();
+
+        countPoint = 36;
+
+        double baseAngle = 360 / countPoint;
+        double angle = -135;
+        double i = 0;
+        while (i < countPoint) {
+            double x = center.getX() + radius.getX() * Math.sin(Math.toRadians(angle));
+            double y = center.getY() + radius.getY() * Math.cos(Math.toRadians(angle));
+            pointsData.add(new PointData(x,y));
+            angle -= baseAngle;
+            i++;
+        }
+        return pointsData;
+    }
+
+    public static int getPerimeter(PointData radius) {
+        // формула расчета периметра эллипса
+        int perimeter = (int) Math.floor(2 * Math.PI * Math.sqrt((Math.pow(radius.getX(), 2) + Math.pow(radius.getY(), 2)) / 2));
+        return perimeter;
     }
 }

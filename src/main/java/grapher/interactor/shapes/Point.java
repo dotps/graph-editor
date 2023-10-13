@@ -31,6 +31,11 @@ public class Point extends Shape {
         return null;
     }
 
+    @Override
+    public int getPerimeter() {
+        return 1;
+    }
+
     public static PointData diffData(PointData pointDataStart, PointData pointDataFinish) {
         double newX = Math.abs(pointDataStart.getX() - pointDataFinish.getX());
         double newY = Math.abs(pointDataStart.getY() - pointDataFinish.getY());

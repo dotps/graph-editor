@@ -30,4 +30,9 @@ public class Line extends Shape {
     public List<PointData> getPointsDataForMorph(int countPoint) {
         return null;
     }
+
+    @Override
+    public int getPerimeter() {
+        return 0;
+    }
 }
