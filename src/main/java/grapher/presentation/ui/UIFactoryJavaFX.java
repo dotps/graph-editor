@@ -100,14 +100,15 @@ public class UIFactoryJavaFX implements IUIFactory {
         slider.setMinorTickCount(4);
         slider.setSnapToTicks(true);
 
-        slider.setOnMouseReleased(event -> {
-            inputService.morphSliderChanged(slider.getValue());
+        slider.setOnMouseDragged(event -> {
+            double position = slider.getValue() / slider.getMax();
+            inputService.morphSliderChanged(position);
         });
 
-//        HBox sliderBox = new HBox();
-//        sliderBox.getChildren().add(slider);
-//        sliderBox.setAlignment(Pos.BOTTOM_CENTER);
-//        sliderBox.setMaxHeight(100);
+//        slider.setOnMouseReleased(event -> {
+//            double position = slider.getValue() / slider.getMax();
+//            inputService.morphSliderChanged(position);
+//        });
 
         return slider;
     }

@@ -59,11 +59,15 @@ public class InputService implements IInputService {
         debug.log("MORPHING");
         //loadShapesHandler();
         Morphing morphing = new Morphing(drawService, canvas);
+        morphing.init(0.5);
     }
 
     @Override
-    public void morphSliderChanged(double iteration) {
-        debug.log(iteration);
+    public void morphSliderChanged(double position) {
+        debug.log("position " + position);
+        canvas.clear();
         Morphing morphing = new Morphing(drawService, canvas);
+        morphing.init(position);
+
     }
 }

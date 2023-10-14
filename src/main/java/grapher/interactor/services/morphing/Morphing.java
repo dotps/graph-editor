@@ -20,10 +20,9 @@ public class Morphing {
     public Morphing(IDrawService drawService, ICanvas canvas) {
         this.drawService = drawService;
         this.canvas = canvas;
-        init();
     }
 
-    public void init() {
+    public void init(double position) {
 
         List<IShape> shapesOnCanvas = drawService.getShapesOnCanvas();
 
@@ -56,7 +55,7 @@ public class Morphing {
         drawLogMorphPoint(pointsStartShape);
         drawLogMorphPoint(pointsFinishShape);
 
-        startMorph(pointsStartShape, pointsFinishShape);
+        startMorph(pointsStartShape, pointsFinishShape, position);
     }
 
     private void drawLogMorphPoint(List<PointData> points) {
@@ -69,7 +68,7 @@ public class Morphing {
         }
     }
 
-    public void startMorph(List<PointData> pointsStartShape, List<PointData> pointsFinishShape) {
+    public void startMorph(List<PointData> pointsStartShape, List<PointData> pointsFinishShape, double position) {
 
 
 
@@ -82,7 +81,7 @@ public class Morphing {
 
             debug.log("X " + length.getX() + ", Y " + length.getY());
 
-            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() / 2, pointStartData.getY() + length.getY() / 2);
+            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() * position, pointStartData.getY() + length.getY() * position);
             Point morphPoint = new Point(morphPointData.getX(), morphPointData.getY());
 
             drawService.draw(morphPoint, canvas);
