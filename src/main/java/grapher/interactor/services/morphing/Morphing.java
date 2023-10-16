@@ -4,10 +4,7 @@ import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
-import grapher.interactor.shapes.IShape;
-import grapher.interactor.shapes.Point;
-import grapher.interactor.shapes.Rectangle;
-import grapher.interactor.shapes.Shapes;
+import grapher.interactor.shapes.*;
 import grapher.utils.debug;
 
 import java.util.ArrayList;
@@ -36,10 +33,8 @@ public class Morphing {
         startShape = shapesOnCanvas.get(0);
         finishShape = shapesOnCanvas.get(1);
 
-//        int countStartShapePoints = startShape.getAllPointsData().size();
-//        int countFinishShapePoints = finishShape.getAllPointsData().size();
-        int countStartShapePoints = 30;
-        int countFinishShapePoints = 30;
+        int countStartShapePoints = startShape.getAllPointsData().size();
+        int countFinishShapePoints = finishShape.getAllPointsData().size();
 
         int maxCountShapePoints = (countStartShapePoints >= countFinishShapePoints) ? countStartShapePoints : countFinishShapePoints;
 
@@ -83,24 +78,9 @@ public class Morphing {
             pointDataList.add(morphPointData);
         }
 
-        Rectangle rectangle = new Rectangle();
-        rectangle.setData(new ShapeData(pointDataList, Shapes.Rectangle));
+        Polygon polygon = new Polygon();
+        polygon.setData(new ShapeData(pointDataList, Shapes.Polygon));
 
-        drawService.draw(rectangle, canvas);
-
-        /*
-        for (int i = 0; i < pointsStartShape.size(); i++) {
-
-            PointData pointStartData = pointsStartShape.get(i);
-            PointData pointFinishData = pointsFinishShape.get(i);
-            PointData length = Point.diffData(pointStartData, pointFinishData);
-
-            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() * position, pointStartData.getY() + length.getY() * position);
-            Point morphPoint = new Point(morphPointData.getX(), morphPointData.getY());
-
-            drawService.draw(morphPoint, canvas);
-//            drawService.drawText(Integer.toString(i + 1), morphPoint, canvas);
-        }
-        */
+        drawService.draw(polygon, canvas);
     }
 }

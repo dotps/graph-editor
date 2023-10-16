@@ -5,5 +5,6 @@ public enum Shapes {
     Line,
     Rectangle,
     Ellipse,
+    Polygon
     //Star
 }
