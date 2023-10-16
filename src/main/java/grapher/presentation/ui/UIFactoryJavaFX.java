@@ -71,7 +71,6 @@ public class UIFactoryJavaFX implements IUIFactory {
     public void createUI() {
 
         StackPane root = new StackPane();
-//        root.setAlignment(Pos.TOP_CENTER);
         HBox menu = createShapesMenu();
 
         CanvasPane canvas = createCanvas();
@@ -104,11 +103,6 @@ public class UIFactoryJavaFX implements IUIFactory {
             double position = slider.getValue() / slider.getMax();
             inputService.morphSliderChanged(position);
         });
-
-//        slider.setOnMouseReleased(event -> {
-//            double position = slider.getValue() / slider.getMax();
-//            inputService.morphSliderChanged(position);
-//        });
 
         return slider;
     }

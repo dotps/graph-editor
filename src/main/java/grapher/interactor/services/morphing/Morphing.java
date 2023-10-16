@@ -14,9 +14,6 @@ public class Morphing {
 
     private final IDrawService drawService;
     private final ICanvas canvas;
-    private IShape startShape;
-    private IShape finishShape;
-    private int countPointForMorphing = 6;
 
     public Morphing(IDrawService drawService, ICanvas canvas) {
         this.drawService = drawService;
@@ -27,24 +24,22 @@ public class Morphing {
 
         List<IShape> shapesOnCanvas = drawService.getShapesOnCanvas();
 
-        if (shapesOnCanvas.size() < 2)
+        int minShapesForMorphing = 2;
+        if (shapesOnCanvas.size() < minShapesForMorphing)
             return;
 
-        startShape = shapesOnCanvas.get(0);
-        finishShape = shapesOnCanvas.get(1);
+        IShape startShape = shapesOnCanvas.get(0);
+        IShape finishShape = shapesOnCanvas.get(1);
 
-        int countStartShapePoints = startShape.getAllPointsData().size();
-        int countFinishShapePoints = finishShape.getAllPointsData().size();
+//        int countStartShapePoints = startShape.getAllPointsData().size();
+//        int countFinishShapePoints = finishShape.getAllPointsData().size();
+//        int maxCountShapePoints = (countStartShapePoints >= countFinishShapePoints) ? countStartShapePoints : countFinishShapePoints;
+//        int startShapePerimeter = startShape.getPerimeter();
+//        int finishShapePerimeter = finishShape.getPerimeter();
+//        int minCountShapePoints = (startShapePerimeter <= finishShapePerimeter) ? startShapePerimeter : finishShapePerimeter;
+//        debug.log("minCountShapePoints " + minCountShapePoints);
 
-        int maxCountShapePoints = (countStartShapePoints >= countFinishShapePoints) ? countStartShapePoints : countFinishShapePoints;
-
-        int startShapePerimeter = startShape.getPerimeter();
-        int finishShapePerimeter = finishShape.getPerimeter();
-
-        int minCountShapePoints = (startShapePerimeter <= finishShapePerimeter) ? startShapePerimeter : finishShapePerimeter;
-        debug.log("minCountShapePoints " + minCountShapePoints);
-
-        minCountShapePoints = 30;
+        int minCountShapePoints = 360;
 
         List<PointData> pointsStartShape = startShape.getPointsDataForMorph(minCountShapePoints);
         List<PointData> pointsFinishShape = finishShape.getPointsDataForMorph(minCountShapePoints);

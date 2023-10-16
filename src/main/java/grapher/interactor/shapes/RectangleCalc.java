@@ -42,10 +42,14 @@ public class RectangleCalc {
 
         List<PointData> points = new ArrayList<>();
 
-        int excludeSidePoints = 2;
-        countPoint -= excludeSidePoints;
+//        int excludeSidePoints = 4;
+//        countPoint -= excludeSidePoints;
+
+        countPoint += 2;
+
 
         double distance = perimeter / countPoint;
+        debug.log("distance " + distance);
 
         for (int indexPoint = 0; indexPoint < pointsData.size(); indexPoint++) {
 
@@ -65,16 +69,16 @@ public class RectangleCalc {
             double xx = x1;
             double yy = y1;
 
-            int countPointsOnSide = getCountPointsOnSide(x1, y1, x2, y2, perimeter, countPoint);
+            PointsOnSide pointsOnSide = getCountPointsOnSide(x1, y1, x2, y2, perimeter, countPoint);
+            int countPointsOnSide = pointsOnSide.getCountPointsOnSide();
+            double distanceOnSide = pointsOnSide.getDistanceOnSide();
 
             double directionX = Math.signum(x2 - x1);
             double directionY = Math.signum(y2 - y1);
 
-            points.add(new PointData(xx,yy));
-
             for (int indexPointOnSide = 0; indexPointOnSide < countPointsOnSide; indexPointOnSide++) {
-                xx += distance * directionX;
-                yy += distance * directionY;
+                xx += distanceOnSide * directionX;
+                yy += distanceOnSide * directionY;
                 PointData point = new PointData(xx, yy);
                 points.add(point);
             }
@@ -83,18 +87,26 @@ public class RectangleCalc {
         return points;
     }
 
-    private static int getCountPointsOnSide(double x1, double y1, double x2, double y2, int perimeter, int countPoint) {
+    private static PointsOnSide getCountPointsOnSide(double x1, double y1, double x2, double y2, int perimeter, int countPoint) {
 
         double lengthX = Math.abs(x2 - x1);
         double lengthY = Math.abs(y2 - y1);
         double xMultiply = perimeter / lengthX;
         double yMultiply = perimeter / lengthY;
+
         int countPointsX = (int) Math.floor(countPoint / xMultiply);
         int countPointsY = (int) Math.floor(countPoint / yMultiply);
 
         int countPointsOnSide = (countPointsX >= countPointsY) ? countPointsX : countPointsY;
 
-        return countPointsOnSide;
+        double distanceX = lengthX / countPointsOnSide;
+        double distanceY = lengthY / countPointsOnSide;
+        double distanceOnSide = (distanceX >= distanceY) ? distanceX : distanceY;
+
+        debug.log("distanceX " + distanceX);
+        debug.log("distanceY " + distanceY);
+
+        return new PointsOnSide(countPointsOnSide, distanceOnSide);
     }
 
     private static boolean isPointInRange(int maxIndex, int currentIndex) {
@@ -102,3 +114,4 @@ public class RectangleCalc {
     }
 
 }
+

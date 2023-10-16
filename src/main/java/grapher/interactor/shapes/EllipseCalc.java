@@ -1,6 +1,7 @@
 package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
+import grapher.utils.debug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +48,13 @@ public class EllipseCalc {
     public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
 
         List<PointData> pointsData = new ArrayList<>();
+        double maxRotationAngle = 360.0;
+        int offsetAngle = -135;
 
         countPoint = Calc.getMaxCountPointOnShape(countPoint);
 
-        double angleRotation = 360 / countPoint;
-        double anglePoint = -135;
+        double angleRotation = maxRotationAngle / countPoint;
+        double anglePoint = offsetAngle;
         double i = 0;
         while (i < countPoint) {
             double x = center.getX() + radius.getX() * Math.sin(Math.toRadians(anglePoint));
