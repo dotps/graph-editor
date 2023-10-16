@@ -25,8 +25,6 @@ public class DrawLine implements IDrawStrategy {
     @Override
     public void draw(IShape shape, ICanvas canvas) {
 
-        debug.log("DRAW " + shape.getClass().getName());
-
         List<PointData> pointDataList = shape.getAllPointsData();
 
         if (pointDataList.size() < 2)

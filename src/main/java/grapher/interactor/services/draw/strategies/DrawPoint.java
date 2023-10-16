@@ -10,9 +10,6 @@ import javafx.scene.paint.Color;
 public class DrawPoint implements IDrawStrategy {
     @Override
     public void draw(IShape shape, ICanvas canvas) {
-
-        debug.log("DRAW " + shape.getClass().getName());
-
         PointData pointData = shape.getFirstPointData();
         canvas.addLine(pointData.getX(), pointData.getY(), pointData.getX(), pointData.getY(), Color.RED, 5);
     }

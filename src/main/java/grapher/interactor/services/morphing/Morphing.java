@@ -1,12 +1,16 @@
 package grapher.interactor.services.morphing;
 
 import grapher.interactor.data.PointData;
+import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.shapes.IShape;
 import grapher.interactor.shapes.Point;
+import grapher.interactor.shapes.Rectangle;
+import grapher.interactor.shapes.Shapes;
 import grapher.utils.debug;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Morphing {
@@ -41,8 +45,6 @@ public class Morphing {
 
         int startShapePerimeter = startShape.getPerimeter();
         int finishShapePerimeter = finishShape.getPerimeter();
-        debug.log(startShapePerimeter);
-        debug.log(finishShapePerimeter);
 
         int minCountShapePoints = (startShapePerimeter <= finishShapePerimeter) ? startShapePerimeter : finishShapePerimeter;
         debug.log("minCountShapePoints " + minCountShapePoints);
@@ -63,29 +65,42 @@ public class Morphing {
         for (PointData pointData : points) {
             Point point = new Point(pointData.getX(), pointData.getY());
             drawService.draw(point, canvas);
-            drawService.drawText(Integer.toString(i), point, canvas);
+//            drawService.drawText(Integer.toString(i), point, canvas);
             i++;
         }
     }
 
     public void startMorph(List<PointData> pointsStartShape, List<PointData> pointsFinishShape, double position) {
 
-
-
-
+        List<PointData> pointDataList = new ArrayList<>();
         for (int i = 0; i < pointsStartShape.size(); i++) {
 
             PointData pointStartData = pointsStartShape.get(i);
             PointData pointFinishData = pointsFinishShape.get(i);
             PointData length = Point.diffData(pointStartData, pointFinishData);
 
-            debug.log("X " + length.getX() + ", Y " + length.getY());
+            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() * position, pointStartData.getY() + length.getY() * position);
+            pointDataList.add(morphPointData);
+        }
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.setData(new ShapeData(pointDataList, Shapes.Rectangle));
+
+        drawService.draw(rectangle, canvas);
+
+        /*
+        for (int i = 0; i < pointsStartShape.size(); i++) {
+
+            PointData pointStartData = pointsStartShape.get(i);
+            PointData pointFinishData = pointsFinishShape.get(i);
+            PointData length = Point.diffData(pointStartData, pointFinishData);
 
             PointData morphPointData = new PointData(pointStartData.getX() + length.getX() * position, pointStartData.getY() + length.getY() * position);
             Point morphPoint = new Point(morphPointData.getX(), morphPointData.getY());
 
             drawService.draw(morphPoint, canvas);
-            drawService.drawText(Integer.toString(i + 1), morphPoint, canvas);
+//            drawService.drawText(Integer.toString(i + 1), morphPoint, canvas);
         }
+        */
     }
 }
