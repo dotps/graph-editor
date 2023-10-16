@@ -3,6 +3,7 @@ package grapher.interactor.shapes;
 import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.strategies.DrawLine;
+import grapher.utils.debug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +29,11 @@ public class Line extends Shape {
 
     @Override
     public List<PointData> getPointsDataForMorph(int countPoint) {
-        return null;
+        return LineCalc.getPointsDataOnCurve(countPoint, getPerimeter(), getData().getPoints());
     }
 
     @Override
     public int getPerimeter() {
-        return 0;
+        return LineCalc.getPerimeter(getData().getPoints());
     }
 }
