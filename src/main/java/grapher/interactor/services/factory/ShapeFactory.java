@@ -4,6 +4,8 @@ import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
 import grapher.interactor.shapes.*;
 
+import java.util.List;
+
 public class ShapeFactory implements IShapeFactory {
 
     @Override
@@ -46,6 +48,8 @@ public class ShapeFactory implements IShapeFactory {
                 return createRect(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
             case Ellipse:
                 return createEllipse(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
+            case Polygon:
+                return createPolygon(null);
             //case Star:
             //    return null;
             default:
@@ -64,5 +68,10 @@ public class ShapeFactory implements IShapeFactory {
     }
     public Ellipse createEllipse(Point pointStart, Point pointFinish) {
         return new Ellipse(pointStart, pointFinish);
+    }
+
+    @Override
+    public Polygon createPolygon(List<Point> points) {
+        return null;
     }
 }

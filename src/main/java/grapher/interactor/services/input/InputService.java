@@ -26,6 +26,7 @@ public class InputService implements IInputService {
 
     public void inputShapesHandler(PointData start, PointData finish, Shapes shapeType) {
         IShape shape = shapeFactory.createShape(start, finish, shapeType);
+        debug.log(shapeType);
         drawService.draw(shape, canvas);
     }
 
