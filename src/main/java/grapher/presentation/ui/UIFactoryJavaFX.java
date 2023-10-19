@@ -44,7 +44,6 @@ public class UIFactoryJavaFX implements IUIFactory {
         }
 
         createActionMenu(hBox);
-
         return hBox;
     }
 

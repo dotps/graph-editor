@@ -1,7 +1,6 @@
 package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
-import grapher.utils.debug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,27 +24,7 @@ public class EllipseCalc {
         return pointDataList;
     }
 
-    /*
-    public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
-
-        List<PointData> pointsData = new ArrayList<>();
-
-        int offset = 45;
-        int iterationAngle = Math.round(-360 / countPoint);
-        double currentAngle = 0;
-
-        for (int i = 0; i < countPoint; i++) {
-            currentAngle = iterationAngle * i + iterationAngle - offset;
-            double x = center.getX() + radius.getX() * Math.sin(Math.toRadians(currentAngle));
-            double y = center.getY() + radius.getY() * Math.cos(Math.toRadians(currentAngle));
-            pointsData.add(new PointData(x,y));
-        }
-
-        return pointsData;
-    }
-     */
-
-    public static List<PointData> getPointsDataOnCurve(int countPoint, PointData center, PointData radius) {
+    public static List<PointData> getPointsDataOnSurface(int countPoint, PointData center, PointData radius) {
 
         List<PointData> pointsData = new ArrayList<>();
         double maxRotationAngle = 360.0;
@@ -66,9 +45,8 @@ public class EllipseCalc {
         return pointsData;
     }
 
-    public static int getPerimeter(PointData radius) {
-        // формула расчета периметра эллипса
-        int perimeter = (int) Math.floor(2 * Math.PI * Math.sqrt((Math.pow(radius.getX(), 2) + Math.pow(radius.getY(), 2)) / 2));
+    public static double getPerimeter(PointData radius) {
+        double perimeter = Math.floor(2 * Math.PI * Math.sqrt((Math.pow(radius.getX(), 2) + Math.pow(radius.getY(), 2)) / 2));
         return perimeter;
     }
 }

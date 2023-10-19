@@ -1,19 +1,19 @@
 package grapher.interactor.shapes;
 
 public class PointsOnSide {
-    private int countPointsOnSide;
-    private double distanceOnSide;
+    private final int countPoints;
+    private final double distance;
 
-    public PointsOnSide(int countPointsOnSide, double distanceOnSide) {
-        this.countPointsOnSide = countPointsOnSide;
-        this.distanceOnSide = distanceOnSide;
+    public PointsOnSide(int countPoints, double distance) {
+        this.countPoints = countPoints;
+        this.distance = distance;
     }
 
-    public int getCountPointsOnSide() {
-        return countPointsOnSide;
+    public int getCountPoints() {
+        return countPoints;
     }
 
-    public double getDistanceOnSide() {
-        return distanceOnSide;
+    public double getDistance() {
+        return distance;
     }
 }

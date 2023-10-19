@@ -29,11 +29,13 @@ public class Line extends Shape {
 
     @Override
     public List<PointData> getPointsDataForMorph(int countPoint) {
-        return LineCalc.getPointsDataOnCurve(countPoint, getPerimeter(), getData().getPoints());
+        double perimeter = getPerimeter();
+        countPoint = normalizeCountPoint(countPoint, perimeter);
+        return LineCalc.getPointsDataOnSurface(countPoint, getData().getPoints());
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         return LineCalc.getPerimeter(getData().getPoints());
     }
 }

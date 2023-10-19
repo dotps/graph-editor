@@ -32,7 +32,7 @@ public class Point extends Shape {
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         return 1;
     }
 

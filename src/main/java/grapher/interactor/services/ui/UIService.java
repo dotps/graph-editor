@@ -5,7 +5,6 @@ import grapher.interactor.services.draw.ICanvas;
 public class UIService implements IUIService {
 
     private final IUIFactory uiFactory;
-
     public UIService(IUIFactory uiFactory) {
         this.uiFactory = uiFactory;
     }

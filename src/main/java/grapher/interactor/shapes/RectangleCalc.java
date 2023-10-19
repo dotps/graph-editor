@@ -2,7 +2,6 @@ package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
 import grapher.utils.debug;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +37,12 @@ public class RectangleCalc {
         return perimeter;
     }
 
-    public static List<PointData> getPointsDataOnCurve(int countPoint, int perimeter, List<PointData> pointsData) {
+    public static List<PointData> getPointsDataOnSurface(int countPoint, double perimeter, List<PointData> pointsData) {
 
         List<PointData> points = new ArrayList<>();
 
-//        int excludeSidePoints = 4;
-//        countPoint -= excludeSidePoints;
-
-        countPoint += 2;
-
-
-        double distance = perimeter / countPoint;
-        debug.log("distance " + distance);
+        int countStartDrawPoints = 2;
+        countPoint += countStartDrawPoints;
 
         for (int indexPoint = 0; indexPoint < pointsData.size(); indexPoint++) {
 
@@ -70,8 +63,8 @@ public class RectangleCalc {
             double yy = y1;
 
             PointsOnSide pointsOnSide = getCountPointsOnSide(x1, y1, x2, y2, perimeter, countPoint);
-            int countPointsOnSide = pointsOnSide.getCountPointsOnSide();
-            double distanceOnSide = pointsOnSide.getDistanceOnSide();
+            int countPointsOnSide = pointsOnSide.getCountPoints();
+            double distanceOnSide = pointsOnSide.getDistance();
 
             double directionX = Math.signum(x2 - x1);
             double directionY = Math.signum(y2 - y1);
@@ -87,7 +80,7 @@ public class RectangleCalc {
         return points;
     }
 
-    private static PointsOnSide getCountPointsOnSide(double x1, double y1, double x2, double y2, int perimeter, int countPoint) {
+    private static PointsOnSide getCountPointsOnSide(double x1, double y1, double x2, double y2, double perimeter, int countPoint) {
 
         double lengthX = Math.abs(x2 - x1);
         double lengthY = Math.abs(y2 - y1);

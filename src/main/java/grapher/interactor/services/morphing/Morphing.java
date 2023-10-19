@@ -39,7 +39,7 @@ public class Morphing {
 //        int minCountShapePoints = (startShapePerimeter <= finishShapePerimeter) ? startShapePerimeter : finishShapePerimeter;
 //        debug.log("minCountShapePoints " + minCountShapePoints);
 
-        int minCountShapePoints = 360;
+        int minCountShapePoints = 30;
 
         List<PointData> pointsStartShape = startShape.getPointsDataForMorph(minCountShapePoints);
         List<PointData> pointsFinishShape = finishShape.getPointsDataForMorph(minCountShapePoints);
@@ -55,7 +55,7 @@ public class Morphing {
         for (PointData pointData : points) {
             Point point = new Point(pointData.getX(), pointData.getY());
             drawService.draw(point, canvas);
-//            drawService.drawText(Integer.toString(i), point, canvas);
+            drawService.drawText(Integer.toString(i), point, canvas);
             i++;
         }
     }

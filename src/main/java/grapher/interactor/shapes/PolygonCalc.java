@@ -19,7 +19,7 @@ public class PolygonCalc {
         return pointDataList;
     }
 
-    public static int getPerimeter(List<PointData> pointDataList) {
+    public static double getPerimeter(List<PointData> pointDataList) {
 
         double x1 = pointDataList.get(0).getX();
         double y1 = pointDataList.get(0).getY();
@@ -30,13 +30,12 @@ public class PolygonCalc {
 
         double lengthSideX = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         double lengthSideY = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-        
-        int perimeter = (int) Math.floor((lengthSideX + lengthSideY) * 2);
 
+        double perimeter = Math.floor((lengthSideX + lengthSideY) * 2);
         return perimeter;
     }
 
-    public static List<PointData> getPointsDataOnCurve(int countPoint, int perimeter, List<PointData> pointsData) {
+    public static List<PointData> getPointsDataOnSurface(int countPoint, double perimeter, List<PointData> pointsData) {
 
         List<PointData> points = new ArrayList<>();
 
@@ -81,7 +80,7 @@ public class PolygonCalc {
         return points;
     }
 
-    private static int getCountPointsOnSide(double x1, double y1, double x2, double y2, int perimeter, int countPoint) {
+    private static int getCountPointsOnSide(double x1, double y1, double x2, double y2, double perimeter, int countPoint) {
 
         double lengthX = Math.abs(x2 - x1);
         double lengthY = Math.abs(y2 - y1);

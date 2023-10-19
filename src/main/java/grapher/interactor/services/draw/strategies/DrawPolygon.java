@@ -4,14 +4,13 @@ import grapher.interactor.data.PointData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawStrategy;
 import grapher.interactor.shapes.IShape;
-//import grapher.interactor.shapes.Line;
 import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class DrawLine implements IDrawStrategy {
+public class DrawPolygon implements IDrawStrategy {
 
-    public static final int MIN_POINT_FOR_DRAW = 2;
+    public static final int MIN_POINT_FOR_DRAW = 3;
 
     @Override
     public void draw(IShape shape, ICanvas canvas) {
@@ -22,14 +21,18 @@ public class DrawLine implements IDrawStrategy {
             return;
 
         PointData prevPointData = null;
+        PointData startPointData = null;
 
         for (PointData pointData : pointDataList) {
             if (prevPointData == null) {
                 prevPointData = pointData;
+                startPointData = pointData;
                 continue;
             }
             canvas.addLine(prevPointData.getX(), prevPointData.getY(), pointData.getX(), pointData.getY(), Color.BLACK, 1);
             prevPointData = pointData;
         }
+
+        canvas.addLine(prevPointData.getX(), prevPointData.getY(), startPointData.getX(), startPointData.getY(), Color.BLACK, 1);
     }
 }

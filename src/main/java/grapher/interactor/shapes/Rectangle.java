@@ -3,9 +3,8 @@ package grapher.interactor.shapes;
 import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.strategies.DrawLine;
-import grapher.utils.debug;
+import grapher.interactor.services.draw.strategies.DrawPolygon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle extends Shape {
@@ -15,7 +14,6 @@ public class Rectangle extends Shape {
 
         setData(new ShapeData(pointDataList, Shapes.Rectangle));
         injectDrawStrategy();
-
     }
 
     public Rectangle() {
@@ -23,15 +21,17 @@ public class Rectangle extends Shape {
     }
 
     private void injectDrawStrategy() {
-        setDrawStrategy(new DrawLine(true));
+        setDrawStrategy(new DrawPolygon());
     }
 
     public List<PointData> getPointsDataForMorph(int countPoint) {
-        return RectangleCalc.getPointsDataOnCurve(countPoint, getPerimeter(), getData().getPoints());
+        double perimeter = getPerimeter();
+        countPoint = normalizeCountPoint(countPoint, perimeter);
+        return RectangleCalc.getPointsDataOnSurface(countPoint, perimeter, getData().getPoints());
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         return RectangleCalc.getPerimeter(getData().getPoints());
     }
 }

@@ -19,7 +19,7 @@ public class Star extends Shape {
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         return 0;
     }
 

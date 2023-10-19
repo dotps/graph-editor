@@ -48,4 +48,10 @@ public abstract class Shape implements IShape {
                 "data=" + data +
                 '}';
     }
+
+    public int normalizeCountPoint(int countPoint, double perimeter) {
+        if (countPoint > perimeter)
+            countPoint = (int) perimeter;
+        return countPoint;
+    }
 }

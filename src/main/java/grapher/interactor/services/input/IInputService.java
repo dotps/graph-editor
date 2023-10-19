@@ -10,11 +10,8 @@ public interface IInputService extends IService {
     void inputShapesHandler(PointData start, PointData finish, Shapes shapeType);
     void setCanvas(ICanvas canvas);
     void saveShapesHandler();
-
     void loadShapesHandler();
-
     void clearCanvasHandler();
     void startMorphingHandler();
-
     void morphSliderChanged(double value);
 }

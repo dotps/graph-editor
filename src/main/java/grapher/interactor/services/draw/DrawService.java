@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DrawService implements IDrawService {
 
-//    Dictionary<ICanvas,IShape> shapesOnCanvas;
     List<IShape> shapesOnCanvas = new ArrayList<>();
 
     public void draw(IShape shape, ICanvas canvas) {

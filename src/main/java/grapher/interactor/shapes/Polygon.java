@@ -2,7 +2,7 @@ package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
-import grapher.interactor.services.draw.strategies.DrawLine;
+import grapher.interactor.services.draw.strategies.DrawPolygon;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ public class Polygon extends Shape {
 
         setData(new ShapeData(pointDataList, Shapes.Polygon));
         injectDrawStrategy();
-
     }
 
     public Polygon() {
@@ -21,15 +20,15 @@ public class Polygon extends Shape {
     }
 
     private void injectDrawStrategy() {
-        setDrawStrategy(new DrawLine(true));
+        setDrawStrategy(new DrawPolygon());
     }
 
     public List<PointData> getPointsDataForMorph(int countPoint) {
-        return PolygonCalc.getPointsDataOnCurve(countPoint, getPerimeter(), getData().getPoints());
+        return PolygonCalc.getPointsDataOnSurface(countPoint, getPerimeter(), getData().getPoints());
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         return PolygonCalc.getPerimeter(getData().getPoints());
     }
 }

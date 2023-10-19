@@ -35,13 +35,12 @@ public class Ellipse extends Shape {
     public List<PointData> getPointsDataForMorph(int countPoint) {
         PointData radius = getRadius();
         PointData center = getCenter();
-        return EllipseCalc.getPointsDataOnCurve(countPoint, center, radius);
+        return EllipseCalc.getPointsDataOnSurface(countPoint, center, radius);
     }
 
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         PointData radius = getRadius();
-        PointData center = getCenter();
         return EllipseCalc.getPerimeter(radius);
     }
 }
