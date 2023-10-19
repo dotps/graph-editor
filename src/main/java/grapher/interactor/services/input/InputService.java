@@ -31,6 +31,12 @@ public class InputService implements IInputService {
     }
 
     @Override
+    public void inputPolygonHandler(List<PointData> polygonPointData) {
+        IShape shape = shapeFactory.createPolygon(polygonPointData);
+        drawService.draw(shape, canvas);
+    }
+
+    @Override
     public void setCanvas(ICanvas canvas) {
         this.canvas = canvas;
     }
@@ -68,4 +74,6 @@ public class InputService implements IInputService {
         Morphing morphing = new Morphing(drawService, canvas);
         morphing.init(position);
     }
+
+
 }

@@ -7,11 +7,8 @@ import grapher.interactor.services.draw.strategies.DrawPolygon;
 import java.util.List;
 
 public class Polygon extends Shape {
-    public Polygon(Point pointStart, Point pointFinish) {
-
-        List<PointData> pointDataList = RectangleCalc.getVertexPoints(pointStart.getFirstPointData(), pointFinish.getFirstPointData());
-
-        setData(new ShapeData(pointDataList, Shapes.Polygon));
+    public Polygon(List<PointData> pointsData) {
+        setData(new ShapeData(pointsData, Shapes.Polygon));
         injectDrawStrategy();
     }
 

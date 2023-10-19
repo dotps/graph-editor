@@ -12,10 +12,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UIFactoryJavaFX implements IUIFactory {
     private final Stage stage;
@@ -23,6 +27,7 @@ public class UIFactoryJavaFX implements IUIFactory {
     private Shapes selectedShape = Shapes.Point;
     private PointData startPointData;
     private PointData finishPointData;
+    private List<PointData> polygonPointData = new ArrayList<>();
 
     public UIFactoryJavaFX(Stage stage, IInputService inputService) {
         this.stage = stage;
@@ -126,11 +131,24 @@ public class UIFactoryJavaFX implements IUIFactory {
 
     private void initMouseReleased(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+
             debug.log("MOUSE_RELEASED canvas");
-            finishPointData = new PointData(event.getX(), event.getY());
-            inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
-            startPointData = null;
-            finishPointData = null;
+
+            if (selectedShape == Shapes.Polygon) {
+                polygonPointData.add(new PointData(event.getX(), event.getY()));
+                debug.log("Add to polygonPointData");
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    debug.log("MOUSE_RELEASED RIGHT BUTTON");
+                    inputService.inputPolygonHandler(polygonPointData);
+                    polygonPointData.clear();
+                }
+            }
+            else {
+                finishPointData = new PointData(event.getX(), event.getY());
+                inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
+                startPointData = null;
+                finishPointData = null;
+            }
         });
     }
 

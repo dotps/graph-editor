@@ -48,8 +48,6 @@ public class ShapeFactory implements IShapeFactory {
                 return createRect(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
             case Ellipse:
                 return createEllipse(createPoint(start.getX(), start.getY()), createPoint(finish.getX(), finish.getY()));
-            case Polygon:
-                return createPolygon(null);
             //case Star:
             //    return null;
             default:
@@ -71,7 +69,7 @@ public class ShapeFactory implements IShapeFactory {
     }
 
     @Override
-    public Polygon createPolygon(List<Point> points) {
-        return null;
+    public Polygon createPolygon(List<PointData> pointsData) {
+        return new Polygon(pointsData);
     }
 }

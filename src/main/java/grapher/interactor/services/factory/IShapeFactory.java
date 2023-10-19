@@ -13,5 +13,5 @@ public interface IShapeFactory {
     Line createLine(Point pointStart, Point pointFinish);
     Rectangle createRect(Point pointStart, Point pointFinish);
     Ellipse createEllipse(Point pointStart, Point pointFinish);
-    Polygon createPolygon(List<Point> points);
+    Polygon createPolygon(List<PointData> points);
 }

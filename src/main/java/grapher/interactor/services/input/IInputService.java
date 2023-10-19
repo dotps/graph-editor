@@ -6,6 +6,8 @@ import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.shapes.IShape;
 import grapher.interactor.shapes.Shapes;
 
+import java.util.List;
+
 public interface IInputService extends IService {
     void inputShapesHandler(PointData start, PointData finish, Shapes shapeType);
     void setCanvas(ICanvas canvas);
@@ -14,4 +16,5 @@ public interface IInputService extends IService {
     void clearCanvasHandler();
     void startMorphingHandler();
     void morphSliderChanged(double value);
+    void inputPolygonHandler(List<PointData> polygonPointData);
 }
