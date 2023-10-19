@@ -140,7 +140,7 @@ public class UIFactoryJavaFX implements IUIFactory {
                 if (event.getButton() == MouseButton.SECONDARY) {
                     debug.log("MOUSE_RELEASED RIGHT BUTTON");
                     inputService.inputPolygonHandler(polygonPointData);
-                    polygonPointData = null;
+                    polygonPointData = new ArrayList<>();
                 }
             }
             else {
