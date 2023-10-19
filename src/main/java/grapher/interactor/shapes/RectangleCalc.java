@@ -20,7 +20,7 @@ public class RectangleCalc {
         return pointDataList;
     }
 
-    public static int getPerimeter(List<PointData> pointDataList) {
+    public static double getPerimeter(List<PointData> pointDataList) {
 
         double x1 = pointDataList.get(0).getX();
         double y1 = pointDataList.get(0).getY();
@@ -31,8 +31,8 @@ public class RectangleCalc {
 
         double lengthSideX = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         double lengthSideY = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-        
-        int perimeter = (int) Math.floor((lengthSideX + lengthSideY) * 2);
+
+        double perimeter = Math.floor((lengthSideX + lengthSideY) * 2);
 
         return perimeter;
     }
