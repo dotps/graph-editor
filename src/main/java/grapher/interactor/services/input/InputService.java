@@ -1,7 +1,6 @@
 package grapher.interactor.services.input;
 
 import grapher.interactor.data.PointData;
-import grapher.interactor.data.ShapeData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;

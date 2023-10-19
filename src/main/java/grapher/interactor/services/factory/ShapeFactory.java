@@ -3,7 +3,9 @@ package grapher.interactor.services.factory;
 import grapher.interactor.data.PointData;
 import grapher.interactor.data.ShapeData;
 import grapher.interactor.shapes.*;
+import grapher.utils.debug;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeFactory implements IShapeFactory {
@@ -29,6 +31,11 @@ public class ShapeFactory implements IShapeFactory {
                 Ellipse ellipse = createEllipse(createPoint(0, 0), radius);
                 ellipse.setData(shapeData);
                 return ellipse;
+            case Polygon:
+                Polygon polygon = createPolygon(new ArrayList<>());
+                polygon.setData(shapeData);
+                debug.log(shapeData.toString());
+                return polygon;
             //case Star:
             //    return null;
             default:

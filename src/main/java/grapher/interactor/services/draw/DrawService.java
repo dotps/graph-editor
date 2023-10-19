@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DrawService implements IDrawService {
 
-    List<IShape> shapesOnCanvas = new ArrayList<>();
+    private List<IShape> shapesOnCanvas = new ArrayList<>();
 
     public void draw(IShape shape, ICanvas canvas) {
         IDrawStrategy drawStrategy = shape.getDrawStrategy();

@@ -26,8 +26,11 @@ public class SaveLoadService implements ISaveLoadService {
         List<IShape> shapes = drawService.getShapesOnCanvas();
         List<ShapeData> shapesData = new ArrayList<>();
 
-        for (IShape shape : shapes)
+        for (IShape shape : shapes) {
             shapesData.add(shape.getData());
+            debug.log("shape.save");
+            debug.log(shape);
+        }
 
         if (saveLoad.save(shapesData))
             debug.log("SAVED CANVAS");
