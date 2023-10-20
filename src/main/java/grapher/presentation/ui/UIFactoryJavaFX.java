@@ -135,16 +135,22 @@ public class UIFactoryJavaFX implements IUIFactory {
                 polygonPointData.add(new PointData(event.getX(), event.getY()));
                 if (event.getButton() == MouseButton.SECONDARY) {
                     inputService.inputPolygonHandler(polygonPointData);
-                    polygonPointData = new ArrayList<>();
+                    clearInputPoints();
                 }
             }
             else {
                 finishPointData = new PointData(event.getX(), event.getY());
                 inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
-                startPointData = null;
-                finishPointData = null;
+                clearInputPoints();
             }
+
         });
+    }
+
+    private void clearInputPoints() {
+        polygonPointData = new ArrayList<>();
+        startPointData = null;
+        finishPointData = null;
     }
 
     private static void initMouseDragged(CanvasPane canvas) {
