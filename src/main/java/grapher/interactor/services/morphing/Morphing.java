@@ -28,8 +28,10 @@ public class Morphing {
         if (shapesOnCanvas.size() < minShapesForMorphing)
             return;
 
-        IShape startShape = shapesOnCanvas.get(0);
-        IShape finishShape = shapesOnCanvas.get(1);
+        int indexStartShape = 0;
+        int indexFinishShape = 1;
+        IShape startShape = shapesOnCanvas.get(indexStartShape);
+        IShape finishShape = shapesOnCanvas.get(indexFinishShape);
 
 //        int countStartShapePoints = startShape.getAllPointsData().size();
 //        int countFinishShapePoints = finishShape.getAllPointsData().size();
