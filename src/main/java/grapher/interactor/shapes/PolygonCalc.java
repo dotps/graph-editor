@@ -46,11 +46,43 @@ public class PolygonCalc {
 
         List<PointData> points = new ArrayList<>();
 
-        int excludeSidePoints = 2;
-        countPoint -= excludeSidePoints;
+//        int countStartDrawPoints = 2;
+//        countPoint += countStartDrawPoints;
+
+//        int countPointsOnSide = getCountPointsOnSide(perimeter, countPoint, pointsData.size());
+        List<Integer> countPointsOnSides = getCountPointsOnSide(perimeter, countPoint, pointsData.size());
 
         double distance = perimeter / countPoint;
 
+        PointData prevPointData = null;
+        PointData startPointData = null;
+
+        int indexSide = 0;
+        for (PointData pointData : pointsData) {
+            if (prevPointData == null) {
+                prevPointData = pointData;
+                startPointData = pointData;
+                continue;
+            }
+
+            List<PointData> linePoints = new ArrayList<>();
+            linePoints.add(prevPointData);
+            linePoints.add(pointData);
+
+            linePoints = LineCalc.getPointsDataOnSurface(countPointsOnSides.get(indexSide), linePoints);
+            points.addAll(linePoints);
+            debug.log(linePoints.size());
+            prevPointData = pointData;
+            indexSide++;
+        }
+
+        List<PointData> linePoints = new ArrayList<>();
+        linePoints.add(prevPointData);
+        linePoints.add(startPointData);
+        linePoints = LineCalc.getPointsDataOnSurface(countPointsOnSides.get(indexSide), linePoints);
+        points.addAll(linePoints);
+
+        /*
         for (int indexPoint = 0; indexPoint < pointsData.size(); indexPoint++) {
 
             double x1 = pointsData.get(indexPoint).getX();
@@ -84,11 +116,36 @@ public class PolygonCalc {
             }
 
         }
+        */
+        debug.log("POLYGON points " + points.size());
         return points;
     }
 
-    private static int getCountPointsOnSide(double x1, double y1, double x2, double y2, double perimeter, int countPoint) {
+    private static List<Integer> getCountPointsOnSide(double perimeter, int countPoint, int countVertex) {
 
+        debug.log("perimeter " + perimeter);
+        debug.log("countPoint " + countPoint);
+        debug.log("countVertex " + countVertex);
+
+        int countPointsOnSide = (int) Math.floor(countPoint / countVertex);
+
+        List<Integer> countPointsOnSides = new ArrayList<>();
+
+        debug.log("countPointsOnSide " + countPointsOnSide);
+
+        int currentCountPoint = countPoint;
+        for (int i = 0; i < countVertex; i++) {
+            currentCountPoint -= countPointsOnSide;
+            if (currentCountPoint < countPointsOnSide)
+                countPointsOnSide += currentCountPoint;
+            debug.log("currentCountPoint >> " + currentCountPoint);
+            countPointsOnSides.add(countPointsOnSide);
+        }
+
+        debug.log(countPointsOnSides);
+
+
+        /*
         double lengthX = Math.abs(x2 - x1);
         double lengthY = Math.abs(y2 - y1);
         double xMultiply = perimeter / lengthX;
@@ -97,8 +154,9 @@ public class PolygonCalc {
         int countPointsY = (int) Math.floor(countPoint / yMultiply);
 
         int countPointsOnSide = (countPointsX >= countPointsY) ? countPointsX : countPointsY;
+*/
 
-        return countPointsOnSide;
+        return countPointsOnSides;
     }
 
     private static boolean isPointInRange(int maxIndex, int currentIndex) {
