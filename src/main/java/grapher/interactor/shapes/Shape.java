@@ -8,6 +8,8 @@ import java.util.List;
 
 public abstract class Shape implements IShape {
 
+    public static final int MIN_COUNT_POINTS_FOR_SHAPE = 2;
+    public static final int INDEX_START_POINT = 0;
     private ShapeData data;
 
     private IDrawStrategy drawStrategy;
@@ -26,7 +28,7 @@ public abstract class Shape implements IShape {
     }
 
     public PointData getFirstPointData() {
-        return data.getPoints().get(0);
+        return data.getPoints().get(INDEX_START_POINT);
     }
 
     public void setData(ShapeData data) {
@@ -53,5 +55,18 @@ public abstract class Shape implements IShape {
         if (countPoint > perimeter)
             countPoint = (int) perimeter;
         return countPoint;
+    }
+
+    public void setPointsDirection() {
+        List<PointData> points = data.getPoints();
+        if (points.size() < MIN_COUNT_POINTS_FOR_SHAPE)
+            return;
+
+        PointData startPoint = points.get(INDEX_START_POINT);
+        PointData finishPoint = points.get(INDEX_START_POINT + 1);
+
+        // TODO: перевернуть массив ??
+        if (startPoint.getX() > finishPoint.getX())
+
     }
 }
