@@ -66,7 +66,19 @@ public abstract class Shape implements IShape {
         PointData finishPoint = points.get(INDEX_START_POINT + 1);
 
         // TODO: перевернуть массив ??
-        if (startPoint.getX() > finishPoint.getX())
+        // Как определить направление ??
+//        if (isLeftBottomDirection()
+//             ||
+//            startPoint.getX() < finishPoint.getX() && startPoint.getY() < finishPoint.getY()
+//        )
 
+    }
+
+    private boolean isLeftBottomDirection(PointData startPoint, PointData finishPoint) {
+        return startPoint.getX() > finishPoint.getX() && startPoint.getY() < finishPoint.getY();
+    }
+
+    private boolean isRightBottomDirection(PointData startPoint, PointData finishPoint) {
+        return startPoint.getX() > finishPoint.getX() && startPoint.getY() < finishPoint.getY();
     }
 }

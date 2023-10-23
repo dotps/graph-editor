@@ -124,13 +124,14 @@ public class UIFactoryJavaFX implements IUIFactory {
 
     private void initMousePressed(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            if (event.getButton() != MouseButton.PRIMARY)
+                return;
             startPointData = new PointData(event.getX(), event.getY());
         });
     }
 
     private void initMouseReleased(CanvasPane canvas) {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-
             if (selectedShape == Shapes.Polygon) {
                 polygonPointData.add(new PointData(event.getX(), event.getY()));
                 if (event.getButton() == MouseButton.SECONDARY) {
@@ -138,12 +139,11 @@ public class UIFactoryJavaFX implements IUIFactory {
                     clearInputPoints();
                 }
             }
-            else {
+            else if (event.getButton() == MouseButton.PRIMARY) {
                 finishPointData = new PointData(event.getX(), event.getY());
                 inputService.inputShapesHandler(startPointData, finishPointData, selectedShape);
                 clearInputPoints();
             }
-
         });
     }
 
