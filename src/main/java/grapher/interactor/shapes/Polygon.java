@@ -9,7 +9,7 @@ import java.util.List;
 public class Polygon extends Shape {
     public Polygon(List<PointData> pointsData) {
 
-        pointsData = Calc.sortPointsFromLeftCorner(pointsData);
+        pointsData = PolygonCalc.sortPointsFromLeftCorner(pointsData);
 
         setData(new ShapeData(pointsData, Shapes.Polygon));
         injectDrawStrategy();
@@ -19,7 +19,7 @@ public class Polygon extends Shape {
         injectDrawStrategy();
     }
 
-    private void injectDrawStrategy() {
+    public void injectDrawStrategy() {
         setDrawStrategy(new DrawPolygon());
     }
 
