@@ -11,6 +11,8 @@ public class Rectangle extends Shape {
     public Rectangle(Point pointStart, Point pointFinish) {
 
         List<PointData> pointDataList = RectangleCalc.getVertexPoints(pointStart.getFirstPointData(), pointFinish.getFirstPointData());
+        // TODO: sortPointsFromLeftCorner плохо работает для прямоугольника, проверить
+//        pointDataList = Calc.sortPointsFromLeftCorner(pointDataList);
 
         setData(new ShapeData(pointDataList, Shapes.Rectangle));
         injectDrawStrategy();
@@ -27,11 +29,11 @@ public class Rectangle extends Shape {
     public List<PointData> getPointsDataForMorph(int countPoint) {
         double perimeter = getPerimeter();
         countPoint = normalizeCountPoint(countPoint, perimeter);
-        return RectangleCalc.getPointsDataOnSurface(countPoint, perimeter, getData().getPoints());
+        return PolygonCalc.getPointsDataOnSurface(countPoint, perimeter, getData().getPoints());
     }
 
     @Override
     public double getPerimeter() {
-        return RectangleCalc.getPerimeter(getData().getPoints());
+        return PolygonCalc.getPerimeter(getData().getPoints());
     }
 }

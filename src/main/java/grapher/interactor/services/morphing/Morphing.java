@@ -73,11 +73,13 @@ public class Morphing {
 
             PointData morphPointData = new PointData(pointStartData.getX() - length.getX() * position, pointStartData.getY() - length.getY() * position);
             pointDataList.add(morphPointData);
+            drawService.drawText(Integer.toString(i + 1), new Point(morphPointData.getX(), morphPointData.getY()), canvas);
         }
 
         Polygon polygon = new Polygon();
         polygon.setData(new ShapeData(pointDataList, Shapes.Polygon));
 
         drawService.draw(polygon, canvas);
+
     }
 }
