@@ -30,8 +30,6 @@ public class EllipseCalc {
         double maxRotationAngle = 360.0;
         int offsetAngle = -135;
 
-        countPoint = Calc.getMaxCountPointOnShape(countPoint);
-
         double angleRotation = maxRotationAngle / countPoint;
         double anglePoint = offsetAngle;
         double i = 0;
