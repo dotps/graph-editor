@@ -67,7 +67,10 @@ public class UIFactoryJavaFX implements IUIFactory {
         hBox.getChildren().add(button);
 
         button = createButton("Clear");
-        button.setOnAction((event) -> inputService.clearCanvasHandler());
+        button.setOnAction((event) -> {
+            clearInputPoints();
+            inputService.clearCanvasHandler();
+        });
         hBox.getChildren().add(button);
     }
 
