@@ -57,7 +57,7 @@ public class Morphing {
         for (PointData pointData : points) {
             Point point = new Point(pointData.getX(), pointData.getY());
             drawService.draw(point, canvas);
-//            drawService.drawText(Integer.toString(i), point, canvas);
+            drawService.drawText(Integer.toString(i), point, canvas);
             i++;
         }
     }
@@ -71,7 +71,7 @@ public class Morphing {
             PointData pointFinishData = pointsFinishShape.get(i);
             PointData length = Point.diffData(pointStartData, pointFinishData);
 
-            PointData morphPointData = new PointData(pointStartData.getX() + length.getX() * position, pointStartData.getY() + length.getY() * position);
+            PointData morphPointData = new PointData(pointStartData.getX() - length.getX() * position, pointStartData.getY() - length.getY() * position);
             pointDataList.add(morphPointData);
         }
 

@@ -37,8 +37,8 @@ public class Point extends Shape {
     }
 
     public static PointData diffData(PointData pointDataStart, PointData pointDataFinish) {
-        double newX = Math.abs(pointDataStart.getX() - pointDataFinish.getX());
-        double newY = Math.abs(pointDataStart.getY() - pointDataFinish.getY());
+        double newX = pointDataStart.getX() - pointDataFinish.getX();
+        double newY = pointDataStart.getY() - pointDataFinish.getY();
         return new PointData(newX, newY);
     }
 
