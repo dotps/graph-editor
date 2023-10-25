@@ -2,7 +2,6 @@ package grapher.interactor.shapes;
 
 import grapher.interactor.data.PointData;
 import grapher.utils.debug;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,10 +82,10 @@ public class PolygonCalc {
         return countPointsOnSides;
     }
 
-    public static List<PointData> sortPointsFromLeftCorner(List<PointData> pointsData) {
+    public static List<PointData> sortPointsFromLeftTopCorner(List<PointData> pointsData) {
 
         List<PointData> sortedPointsData = new ArrayList<>();
-        int indexLeftPoint = getIndexLeftPoint(pointsData);
+        int indexLeftPoint = getIndexLeftTopPoint(pointsData);
 
         debug.log("indexLeftPoint " + indexLeftPoint);
 
@@ -122,16 +121,19 @@ public class PolygonCalc {
         return sumArea > 0;
     }
 
-    private static int getIndexLeftPoint(List<PointData> pointsData) {
+    private static int getIndexLeftTopPoint(List<PointData> pointsData) {
 
         int index = 0;
         double leftX = pointsData.get(index).getX();
+        double leftY = pointsData.get(index).getY();
 
         for (int i = 0; i < pointsData.size(); i++) {
-            debug.log(pointsData.get(i).getX() + " " + pointsData.get(i).getY() + " " + i);
-            if (pointsData.get(i).getX() < leftX) {
-                leftX = pointsData.get(i).getX();
-                index = i;
+            if (pointsData.get(i).getX() <= leftX) {
+                if (pointsData.get(i).getY() <= leftY) {
+                    leftX = pointsData.get(i).getX();
+                    leftY = pointsData.get(i).getY();
+                    index = i;
+                }
             }
         }
         return index;
