@@ -6,9 +6,6 @@ import grapher.presentation.draw.CanvasPane;
 import grapher.interactor.services.input.IInputService;
 import grapher.interactor.shapes.Shapes;
 import grapher.interactor.services.ui.IUIFactory;
-import grapher.utils.debug;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -29,6 +26,7 @@ public class UIFactoryJavaFX implements IUIFactory {
     private PointData finishPointData;
     private List<PointData> polygonPointData = new ArrayList<>();
     private Slider slider;
+    private ICanvas canvas;
 
     public UIFactoryJavaFX(Stage stage, IInputService inputService) {
         this.stage = stage;
@@ -82,7 +80,8 @@ public class UIFactoryJavaFX implements IUIFactory {
         HBox menu = createShapesMenu();
 
         CanvasPane canvas = createCanvas();
-        inputService.setCanvas(canvas);
+        setCanvas(canvas);
+//        inputService.setCanvas(canvas);
 
         Slider slider = createSlider();
         menu.getChildren().add(slider);
@@ -96,6 +95,15 @@ public class UIFactoryJavaFX implements IUIFactory {
         stage.setTitle("Graph Editor");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public ICanvas getCanvas() {
+        return canvas;
+    }
+    @Override
+    public void setCanvas(ICanvas canvas) {
+        this.canvas = canvas;
     }
 
     private Slider createSlider() {

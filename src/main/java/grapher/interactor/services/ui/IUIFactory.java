@@ -9,4 +9,8 @@ public interface IUIFactory {
     Button createButton(String title);
     HBox createShapesMenu();
     void createUI();
+
+    public ICanvas getCanvas();
+
+    void setCanvas(ICanvas canvas);
 }
