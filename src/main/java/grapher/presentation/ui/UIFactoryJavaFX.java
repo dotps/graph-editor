@@ -28,6 +28,7 @@ public class UIFactoryJavaFX implements IUIFactory {
     private PointData startPointData;
     private PointData finishPointData;
     private List<PointData> polygonPointData = new ArrayList<>();
+    private Slider slider;
 
     public UIFactoryJavaFX(Stage stage, IInputService inputService) {
         this.stage = stage;
@@ -85,6 +86,8 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         Slider slider = createSlider();
         menu.getChildren().add(slider);
+        inputService.setCanvas(canvas);
+
 
         root.getChildren().add(menu);
         root.getChildren().add(canvas);
@@ -112,6 +115,10 @@ public class UIFactoryJavaFX implements IUIFactory {
         });
 
         return slider;
+    }
+
+    public void setSliderPosition(double position) {
+        slider.setValue(position);
     }
 
     private CanvasPane createCanvas() {

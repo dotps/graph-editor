@@ -87,8 +87,6 @@ public class PolygonCalc {
         List<PointData> sortedPointsData = new ArrayList<>();
         int indexLeftPoint = getIndexLeftTopPoint(pointsData);
 
-        debug.log("indexLeftPoint " + indexLeftPoint);
-
         if (indexLeftPoint == 0)
             return pointsData;
 
