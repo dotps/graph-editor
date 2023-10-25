@@ -32,9 +32,8 @@ public class ShapeFactory implements IShapeFactory {
                 ellipse.setData(shapeData);
                 return ellipse;
             case Polygon:
-                Polygon polygon = createPolygon(new ArrayList<>());
+                Polygon polygon = createPolygon();
                 polygon.setData(shapeData);
-                debug.log(shapeData.toString());
                 return polygon;
             //case Star:
             //    return null;
@@ -78,5 +77,9 @@ public class ShapeFactory implements IShapeFactory {
     @Override
     public Polygon createPolygon(List<PointData> pointsData) {
         return new Polygon(pointsData);
+    }
+
+    public Polygon createPolygon() {
+        return new Polygon();
     }
 }
