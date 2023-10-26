@@ -82,7 +82,7 @@ public class UIFactoryJavaFX implements IUIFactory {
         CanvasPane canvas = createCanvas();
         setCanvas(canvas);
 
-        Slider slider = createSlider();
+        createSlider();
         menu.getChildren().add(slider);
 
         root.getChildren().add(menu);
@@ -104,9 +104,9 @@ public class UIFactoryJavaFX implements IUIFactory {
         inputService.setCanvas(canvas);
     }
 
-    private Slider createSlider() {
+    private void createSlider() {
 
-        Slider slider = new Slider(0.0, 10.0, 0.0);
+        slider = new Slider(0.0, 10.0, 0.0);
         slider.setPrefWidth(500);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
@@ -120,12 +120,11 @@ public class UIFactoryJavaFX implements IUIFactory {
             inputService.morphSliderChanged(position);
         });
 
-        return slider;
     }
 
     @Override
     public void setSliderPosition(double position) {
-        slider.setValue(position);
+        slider.setValue(position * slider.getMax());
     }
 
     private CanvasPane createCanvas() {

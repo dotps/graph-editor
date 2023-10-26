@@ -29,7 +29,8 @@ public class App extends Application {
         IUIFactory uiFactory = new UIFactoryJavaFX(stage, inputService);
         IUIService uiService = new UIService(uiFactory);
 
-        uiService.showUI();
+        uiService.createUI();
+        inputService.injectUIService(uiService);
 
 //        inputService.setCanvas(uiFactory.getCanvas());
 

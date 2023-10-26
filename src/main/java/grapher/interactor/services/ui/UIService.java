@@ -8,7 +8,7 @@ public class UIService implements IUIService {
     }
 
     @Override
-    public void showUI() {
+    public void createUI() {
         uiFactory.createUI();
     }
 

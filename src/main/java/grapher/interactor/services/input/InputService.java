@@ -6,6 +6,7 @@ import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.morphing.IMorphingService;
 import grapher.interactor.services.saveload.ISaveLoadService;
+import grapher.interactor.services.ui.IUIService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
 
@@ -17,6 +18,7 @@ public class InputService implements IInputService {
     private final IShapeFactory shapeFactory;
     private final IMorphingService morphingService;
     private ICanvas canvas;
+    private IUIService uiService;
 
     public InputService(IDrawService drawService, ISaveLoadService saveLoadService, IShapeFactory shapeFactory, IMorphingService morphingService) {
         this.drawService = drawService;
@@ -35,6 +37,11 @@ public class InputService implements IInputService {
     public void inputPolygonHandler(List<PointData> polygonPointData) {
         IShape shape = shapeFactory.createPolygon(polygonPointData);
         drawService.draw(shape, canvas);
+    }
+
+    @Override
+    public void injectUIService(IUIService uiService) {
+        this.uiService = uiService;
     }
 
     @Override
@@ -65,6 +72,7 @@ public class InputService implements IInputService {
     @Override
     public void startMorphingHandler() {
         double halfRange = 0.5;
+        uiService.moveSlider(halfRange);
         morphSliderChanged(halfRange);
     }
 
