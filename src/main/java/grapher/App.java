@@ -31,6 +31,8 @@ public class App extends Application {
 
         uiService.showUI();
 
+//        inputService.setCanvas(uiFactory.getCanvas());
+
     }
 
     public static void main(String[] args) {

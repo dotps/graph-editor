@@ -81,12 +81,9 @@ public class UIFactoryJavaFX implements IUIFactory {
 
         CanvasPane canvas = createCanvas();
         setCanvas(canvas);
-//        inputService.setCanvas(canvas);
 
         Slider slider = createSlider();
         menu.getChildren().add(slider);
-        inputService.setCanvas(canvas);
-
 
         root.getChildren().add(menu);
         root.getChildren().add(canvas);
@@ -104,6 +101,7 @@ public class UIFactoryJavaFX implements IUIFactory {
     @Override
     public void setCanvas(ICanvas canvas) {
         this.canvas = canvas;
+        inputService.setCanvas(canvas);
     }
 
     private Slider createSlider() {

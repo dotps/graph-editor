@@ -64,7 +64,8 @@ public class InputService implements IInputService {
 
     @Override
     public void startMorphingHandler() {
-        morphSliderChanged(0.5);
+        double halfRange = 0.5;
+        morphSliderChanged(halfRange);
     }
 
     @Override
