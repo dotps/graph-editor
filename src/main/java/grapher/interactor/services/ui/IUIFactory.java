@@ -13,4 +13,6 @@ public interface IUIFactory {
     public ICanvas getCanvas();
 
     void setCanvas(ICanvas canvas);
+
+    void setSliderPosition(double position);
 }

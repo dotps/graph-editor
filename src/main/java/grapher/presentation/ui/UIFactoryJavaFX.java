@@ -123,6 +123,7 @@ public class UIFactoryJavaFX implements IUIFactory {
         return slider;
     }
 
+    @Override
     public void setSliderPosition(double position) {
         slider.setValue(position);
     }

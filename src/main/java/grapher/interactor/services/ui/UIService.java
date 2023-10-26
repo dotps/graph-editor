@@ -1,10 +1,8 @@
 package grapher.interactor.services.ui;
 
-import grapher.interactor.services.draw.ICanvas;
-
 public class UIService implements IUIService {
-
     private final IUIFactory uiFactory;
+    
     public UIService(IUIFactory uiFactory) {
         this.uiFactory = uiFactory;
     }
@@ -12,5 +10,10 @@ public class UIService implements IUIService {
     @Override
     public void showUI() {
         uiFactory.createUI();
+    }
+
+    @Override
+    public void moveSlider(double position) {
+        uiFactory.setSliderPosition(position);
     }
 }

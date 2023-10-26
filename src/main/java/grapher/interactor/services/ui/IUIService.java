@@ -5,4 +5,5 @@ import grapher.interactor.services.draw.ICanvas;
 
 public interface IUIService extends IService {
     void showUI();
+    void moveSlider(double position);
 }
