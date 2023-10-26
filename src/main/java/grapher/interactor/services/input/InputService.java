@@ -5,8 +5,6 @@ import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.morphing.IMorphingService;
-import grapher.interactor.services.morphing.Morphing;
-import grapher.interactor.services.morphing.MorphingService;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
