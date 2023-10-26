@@ -4,7 +4,9 @@ import grapher.interactor.data.PointData;
 import grapher.interactor.services.draw.ICanvas;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
+import grapher.interactor.services.morphing.IMorphingService;
 import grapher.interactor.services.morphing.Morphing;
+import grapher.interactor.services.morphing.MorphingService;
 import grapher.interactor.services.saveload.ISaveLoadService;
 import grapher.interactor.shapes.*;
 import grapher.utils.debug;
@@ -15,12 +17,14 @@ public class InputService implements IInputService {
     private final IDrawService drawService;
     private final ISaveLoadService saveLoadService;
     private final IShapeFactory shapeFactory;
+    private final IMorphingService morphingService;
     private ICanvas canvas;
 
-    public InputService(IDrawService drawService, ISaveLoadService saveLoadService, IShapeFactory shapeFactory) {
+    public InputService(IDrawService drawService, ISaveLoadService saveLoadService, IShapeFactory shapeFactory, IMorphingService morphingService) {
         this.drawService = drawService;
         this.saveLoadService = saveLoadService;
         this.shapeFactory = shapeFactory;
+        this.morphingService = morphingService;
     }
 
     public void inputShapesHandler(PointData start, PointData finish, Shapes shapeType) {
@@ -62,16 +66,13 @@ public class InputService implements IInputService {
 
     @Override
     public void startMorphingHandler() {
-        debug.log("MORPHING");
-        Morphing morphing = new Morphing(drawService, canvas);
-        morphing.init(0.5);
+        morphSliderChanged(0.5);
     }
 
     @Override
     public void morphSliderChanged(double position) {
         canvas.clear();
-        Morphing morphing = new Morphing(drawService, canvas);
-        morphing.init(position);
+        morphingService.init(position, canvas);
     }
 
 

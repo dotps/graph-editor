@@ -4,6 +4,7 @@ import grapher.interactor.services.draw.DrawService;
 import grapher.interactor.services.draw.IDrawService;
 import grapher.interactor.services.factory.IShapeFactory;
 import grapher.interactor.services.factory.ShapeFactory;
+import grapher.interactor.services.morphing.IMorphingService;
 import grapher.interactor.services.morphing.MorphingService;
 import grapher.interactor.services.ui.IUIFactory;
 import grapher.presentation.ui.UIFactoryJavaFX;
@@ -23,11 +24,10 @@ public class App extends Application {
         IDrawService drawService = new DrawService();
         IShapeFactory shapeFactory = new ShapeFactory();
         ISaveLoadService saveLoadService = new SaveLoadService(shapeFactory, drawService);
-        IInputService inputService = new InputService(drawService, saveLoadService, shapeFactory);
+        IMorphingService morphingService = new MorphingService(drawService);
+        IInputService inputService = new InputService(drawService, saveLoadService, shapeFactory, morphingService);
         IUIFactory uiFactory = new UIFactoryJavaFX(stage, inputService);
         IUIService uiService = new UIService(uiFactory);
-
-        MorphingService morphing = new MorphingService(drawService, uiFactory);
 
         uiService.showUI();
 

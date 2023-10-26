@@ -13,19 +13,18 @@ import grapher.interactor.shapes.Shapes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MorphingService {
+public class MorphingService implements IMorphingService {
 
     private final IDrawService drawService;
-    private final IUIFactory uiFactory;
-    private final ICanvas canvas;
+    private ICanvas canvas;
 
-    public MorphingService(IDrawService drawService, IUIFactory uiFactory) {
+    public MorphingService(IDrawService drawService) {
         this.drawService = drawService;
-        this.uiFactory = uiFactory;
-        this.canvas = uiFactory.getCanvas();
     }
 
-    public void init(double position) {
+    public void init(double position, ICanvas canvas) {
+
+        this.canvas = canvas;
 
         List<IShape> shapesOnCanvas = drawService.getShapesOnCanvas();
 
@@ -67,7 +66,7 @@ public class MorphingService {
         }
     }
 
-    public void startMorph(List<PointData> pointsStartShape, List<PointData> pointsFinishShape, double position) {
+    private void startMorph(List<PointData> pointsStartShape, List<PointData> pointsFinishShape, double position) {
 
         List<PointData> pointDataList = new ArrayList<>();
         for (int i = 0; i < pointsStartShape.size(); i++) {
