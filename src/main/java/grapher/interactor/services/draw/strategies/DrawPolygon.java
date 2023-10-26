@@ -23,10 +23,7 @@ public class DrawPolygon implements IDrawStrategy {
         PointData prevPointData = null;
         PointData startPointData = null;
 
-        int i = 0;
         for (PointData pointData : pointDataList) {
-            i++;
-            canvas.addText(Integer.toString(i - 1), pointData.getX(), pointData.getY());
             if (prevPointData == null) {
                 prevPointData = pointData;
                 startPointData = pointData;
@@ -34,7 +31,6 @@ public class DrawPolygon implements IDrawStrategy {
             }
             canvas.addLine(prevPointData.getX(), prevPointData.getY(), pointData.getX(), pointData.getY(), Color.BLACK, 1);
             prevPointData = pointData;
-
         }
 
         canvas.addLine(prevPointData.getX(), prevPointData.getY(), startPointData.getX(), startPointData.getY(), Color.BLACK, 1);
